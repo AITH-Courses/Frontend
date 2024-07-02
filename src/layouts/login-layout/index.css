@@ -1,0 +1,80 @@
+.login-layout{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-layout__form-side{
+    background-color: white;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-layout__logo-side{
+    background-color: var(--dark);
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-side__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 72px;
+}
+
+.logo-side__full-name{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    font-weight: bold;
+}
+
+.logo-side__aith{
+    background-color: var(--light-white);
+    text-transform: uppercase;
+    font-size: 72px;
+    padding: 16px 32px;
+}
+
+.logo-side__courses{
+    color: var(--light-white);
+    text-transform: uppercase;
+    font-size: 72px;
+}
+
+.logo-side__description{
+    text-transform: uppercase;
+    color: var(--light-white);
+    font-size: 32px;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    .logo-side__aith, .logo-side__courses{
+        font-size: 40px;
+    }
+    .logo-side__description{
+        font-size: 24px;
+    }
+    .login-layout__form-side{
+        width: 60%;
+    }
+    .login-layout__logo-side{
+        width: 40%;
+    }
+}
+@media (max-width: 950px) {
+    .login-layout__form-side{
+        width: 100%;
+    }
+    .login-layout__logo-side{
+        display: none;
+    }
+}
