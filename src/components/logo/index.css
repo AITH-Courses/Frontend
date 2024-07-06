@@ -18,3 +18,13 @@
     font-size: 22px;
     font-weight: bold;
 }
+
+.contrast .logo__aith{
+    background-color: var(--light-white);
+    color: var(--dark);
+    font-weight: bold;
+}
+.contrast .logo__courses{
+    color: var(--light-white);
+    font-weight: normal;
+}

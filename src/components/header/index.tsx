@@ -24,15 +24,15 @@ const Header = () => {
             <header>
                 <Group justify="space-between" h="100%">
                     <Link className={"logo__link"} to={"/"}>
-                        <Logo/>
+                        <Logo contrast={false}/>
                     </Link>
 
                     <Group h="100%" gap={0} visibleFrom="sm">
                         <NavLink className={"navbar__link"} to={"/"}>
-                            Home
+                            Главная
                         </NavLink>
                         <NavLink className={"navbar__link"} to={"/courses"}>
-                            Courses
+                            Курсы
                         </NavLink>
                     </Group>
 
@@ -80,7 +80,6 @@ const Header = () => {
                 onClose={closeDrawer}
                 size="100%"
                 padding="md"
-                title="Menu"
                 hiddenFrom="sm"
                 zIndex={1000000}
             >
@@ -92,10 +91,10 @@ const Header = () => {
                         gap="xs"
                     >
                         <NavLink className={"navbar__link"} to={"/"}>
-                            Home
+                            Главная
                         </NavLink>
                         <NavLink className={"navbar__link"} to={"/courses"}>
-                            Courses
+                            Курсы
                         </NavLink>
                     </Stack>
                     <Divider my="sm" />

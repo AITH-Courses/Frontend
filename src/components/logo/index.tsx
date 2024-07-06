@@ -1,8 +1,15 @@
 import "./index.css";
+import React from "react";
 
-const Logo = () => {
+interface LogoProps{
+    contrast: boolean,
+}
+
+const Logo: React.FC<LogoProps> = (props) => {
+    const {contrast=false} = props;
+
     return(
-        <div className="logo">
+        <div className={contrast? "logo contrast": "logo"}>
             <p className="logo__aith">Aith</p>
             <p className="logo__courses">Courses</p>
         </div>
