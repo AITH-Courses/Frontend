@@ -9,20 +9,20 @@ const URL = {
     CURRENT_USER: "/auth/me",
 };
 
-const registerTalent = async (data: IRegisterTalent) => {
-    return  await axiosInstance.post<IAuthToken>(URL.REGISTER_TALENT, data);
+const registerTalent = (data: IRegisterTalent) => {
+    return  axiosInstance.post<IAuthToken>(URL.REGISTER_TALENT, data).then(res => res.data);
 };
 
-const loginUser = async (data: ILoginUser) => {
-    return  await axiosInstance.post<IAuthToken>(URL.LOGIN_USER, data);
+const loginUser = (data: ILoginUser) => {
+    return axiosInstance.post<IAuthToken>(URL.LOGIN_USER, data).then(res => res.data);
 };
 
-const logoutUser = async () => {
-    return  await axiosInstance.post<ISuccessOperation>(URL.LOGOUT_USER);
+const logoutUser = () => {
+    return axiosInstance.post<ISuccessOperation>(URL.LOGOUT_USER).then(res => res.data);
 };
 
 const getCurrentUser = async () => {
-    return  await axiosInstance.post<IUser>(URL.CURRENT_USER);
+    return axiosInstance.get<IUser>(URL.CURRENT_USER).then(res => res.data);
 };
 
 export {registerTalent, loginUser, logoutUser, getCurrentUser}

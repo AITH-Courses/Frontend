@@ -13,6 +13,10 @@ interface ISuccessOperation{
     message: string
 }
 
+interface IFailedOperation{
+    message: string
+}
+
 interface ILoginUser{
     email: string,
     password: string,
@@ -23,6 +27,7 @@ interface IUser{
     firstname: string,
     lastname: string,
     email: string,
+    role: string,
 }
 
-export {IRegisterTalent, IAuthToken, ILoginUser, IUser, ISuccessOperation};
+export {IRegisterTalent, IAuthToken, ILoginUser, IUser, ISuccessOperation, IFailedOperation};
