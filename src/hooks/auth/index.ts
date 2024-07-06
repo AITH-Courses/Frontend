@@ -25,9 +25,6 @@ const useLogin = () => {
         {
             mutationKey: ["login"],
             mutationFn: (data: ILoginUser) => loginUser(data),
-            onSuccess(res){
-                return res.data
-            }
         }
     )
 };

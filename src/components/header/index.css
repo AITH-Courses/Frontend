@@ -16,6 +16,7 @@
 .navbar__link:hover{
     background-color: var(--light-grey);
     transition: background-color 0.7s;
+    cursor: pointer;
 }
 .navbar__link.active{
     color: var(--orange);
