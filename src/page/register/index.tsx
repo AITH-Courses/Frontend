@@ -1,27 +1,40 @@
 import React, {useState} from "react";
-import LoginLayout from "../../template/login-layout";
-import {TextInput, Stack, PasswordInput, Container, Title, Space, Button, Text} from "@mantine/core";
-import { Link } from "react-router-dom";
+import LoginLayout from "../../layouts/login-layout";
+import {TextInput, Stack, PasswordInput, Container, Title, Space, Button, Text, Input} from "@mantine/core";
+import {Link, useNavigate} from "react-router-dom";
+import {useRegistration} from "../../hooks/auth";
+import axios, {AxiosError} from "axios";
+import {IAuthToken, IFailedOperation, IRegisterTalent} from "../../types/auth.ts";
+import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
 
-interface RegisterData  {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    password2: string
-}
 
-const initialRegisterData: RegisterData = {
-    firstName: "",
-    lastName: "",
+const initialRegisterData: IRegisterTalent = {
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
-    password2: ""
 }
 
 
 export default function RegisterPage(){
-    const [data, setData] = useState<RegisterData>(initialRegisterData);
+    const navigate = useNavigate();
+    const {mutateAsync, isError, error, isPending, isSuccess, data} = useRegistration()
+    const [registerData, setRegisterData] = useState<IRegisterTalent>(initialRegisterData);
+    const errors = [];
+    if (isError && axios.isAxiosError(error)){
+        const e = error as AxiosError<IFailedOperation, never>;
+        try{
+            const errorMessage = e.response.data.message;
+            errors.push(errorMessage);
+        } catch {
+            console.error(e);
+        }
+    }
+    if (isSuccess){
+        localStorage.setItem(AUTH_TOKEN_KEY, (data as IAuthToken).auth_token);
+        navigate("/profile");
+    }
+
 
     return (
         <>
@@ -33,36 +46,35 @@ export default function RegisterPage(){
                         </Title>
                         <Space h="xs" />
                         <TextInput
-                            value={data.firstName}
-                            onChange={(event) => setData({...data, firstName: event.currentTarget.value})}
+                            value={registerData.firstname}
+                            onChange={(event) => setRegisterData({...registerData, firstname: event.currentTarget.value})}
                             size="md"
                             placeholder="имя"
                         />
                         <TextInput
-                            value={data.lastName}
-                            onChange={(event) => setData({...data, lastName: event.currentTarget.value})}
+                            value={registerData.lastname}
+                            onChange={(event) => setRegisterData({...registerData, lastname: event.currentTarget.value})}
                             size="md"
                             placeholder="фамилия"
                         />
                         <TextInput
-                            value={data.email}
-                            onChange={(event) => setData({...data, email: event.currentTarget.value})}
+                            value={registerData.email}
+                            onChange={(event) => setRegisterData({...registerData, email: event.currentTarget.value})}
                             size="md"
                             placeholder="email"
                         />
                         <PasswordInput
-                            value={data.password}
-                            onChange={(event) => setData({...data, password: event.currentTarget.value})}
+                            value={registerData.password}
+                            onChange={(event) => setRegisterData({...registerData, password: event.currentTarget.value})}
                             size="md"
                             placeholder="пароль"
                         />
-                        <PasswordInput
-                            value={data.password2}
-                            onChange={(event) => setData({...data, password2: event.currentTarget.value})}
-                            size="md"
-                            placeholder="повтор пароля"
-                        />
-                        <Button size={"md"} color="orange" fullWidth>
+                        {
+                            errors.map(err => (
+                                <Input.Error key={err}>{err}</Input.Error>
+                            ))
+                        }
+                        <Button size={"md"} color="orange" fullWidth disabled={isPending} onClick={() => mutateAsync(registerData)}>
                             Создать аккаунт
                         </Button>
                         <Link to={"/login"}>

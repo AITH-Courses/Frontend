@@ -1,21 +1,37 @@
 import React, {useState} from "react";
-import LoginLayout from "../../template/login-layout";
-import {TextInput, Stack, PasswordInput, Container, Title, Space, Button, Text} from "@mantine/core";
-import { Link } from "react-router-dom";
+import LoginLayout from "../../layouts/login-layout";
+import {Input, TextInput, Stack, PasswordInput, Container, Title, Space, Button, Text} from "@mantine/core";
+import {Link, useNavigate} from "react-router-dom";
+import {useLogin} from "../../hooks/auth";
+import axios, {AxiosError} from "axios";
+import {IAuthToken, IFailedOperation, ILoginUser} from "../../types/auth.ts";
+import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
 
-interface LoginData  {
-    email: string,
-    password: string
-}
 
-const initialLoginData: LoginData = {
+const initialLoginData: ILoginUser = {
     email: "",
     password: ""
 }
 
 
 export default function LoginPage(){
-    const [data, setData] = useState<LoginData>(initialLoginData);
+    const navigate = useNavigate();
+    const {mutateAsync, isError, error, isPending, isSuccess, data} = useLogin()
+    const [loginData, setLoginData] = useState<ILoginUser>(initialLoginData);
+    const errors = [];
+    if (isError && axios.isAxiosError(error)){
+        const e = error as AxiosError<IFailedOperation, never>;
+        try{
+            const errorMessage = e.response.data.message;
+            errors.push(errorMessage);
+        } catch {
+            console.error(e);
+        }
+    }
+    if (isSuccess){
+        localStorage.setItem(AUTH_TOKEN_KEY, (data as IAuthToken).auth_token);
+        navigate("/profile");
+    }
 
     return (
         <>
@@ -25,18 +41,23 @@ export default function LoginPage(){
                         <Title style={{textAlign: "center"}} order={2}>Добро пожаловать</Title>
                         <Space h="xs" />
                         <TextInput
-                            value={data.email}
-                            onChange={(event) => setData({...data, email: event.currentTarget.value})}
+                            value={loginData.email}
+                            onChange={(event) => setLoginData({...loginData, email: event.currentTarget.value})}
                             size="md"
                             placeholder="email"
                         />
                         <PasswordInput
-                            value={data.password}
-                            onChange={(event) => setData({...data, password: event.currentTarget.value})}
+                            value={loginData.password}
+                            onChange={(event) => setLoginData({...loginData, password: event.currentTarget.value})}
                             size="md"
                             placeholder="пароль"
                         />
-                        <Button size={"md"} color="orange" fullWidth>
+                        {
+                            errors.map(err => (
+                                <Input.Error key={err}>{err}</Input.Error>
+                            ))
+                        }
+                        <Button size={"md"} color="orange" fullWidth disabled={isPending} onClick={() => mutateAsync(loginData)}>
                             Войти
                         </Button>
                         <Link to={"/register"}>
