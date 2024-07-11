@@ -62,10 +62,10 @@ const Header = () => {
                         : isError || isFetching
                         ? (
                             <Group visibleFrom="sm">
-                                <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="dark">
+                                <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="black">
                                     Sign in
                                 </Button>
-                                <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="dark">
+                                <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="black">
                                     Sign up
                                 </Button>
                             </Group>
@@ -117,8 +117,8 @@ const Header = () => {
                         : isError
                             ? (
                                 <Group justify="center" grow pb="xl" px="md">
-                                    <Button radius={100} size="sm" variant="outline" color="dark">Log in</Button>
-                                    <Button radius={100} size="sm" variant="filled" color="dark">Sign up</Button>
+                                    <Button radius={100} size="sm" variant="outline" color="black">Log in</Button>
+                                    <Button radius={100} size="sm" variant="filled" color="black">Sign up</Button>
                                 </Group>
                             )
                             : null
