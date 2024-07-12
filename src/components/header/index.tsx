@@ -31,7 +31,7 @@ const Header = () => {
                         <NavLink className={"navbar__link"} to={"/"}>
                             Главная
                         </NavLink>
-                        <NavLink className={"navbar__link"} to={"/courses"}>
+                        <NavLink className={"navbar__link"} to={"/courses"} end>
                             Курсы
                         </NavLink>
                     </Group>
