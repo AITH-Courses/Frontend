@@ -1,0 +1,10 @@
+.course-card{
+    align-self: stretch;
+    transition:
+        box-shadow 300ms ease,
+        transform 300ms ease;
+}
+.course-card:hover{
+    box-shadow: var(--mantine-shadow-md);
+    transform: scale(1.05);
+}
