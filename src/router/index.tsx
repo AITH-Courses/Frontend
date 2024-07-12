@@ -5,6 +5,7 @@ import RegisterPage from "../page/register";
 import {Page404} from "../page/404";
 import UserProfilePage from "../page/user-profile";
 import CoursesPage from "../page/courses";
+import CourseInfoPage from "../page/course-info";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,12 @@ const router = createBrowserRouter([
         path: "/courses",
         element: (
             <CoursesPage/>
+        ),
+    },
+    {
+        path: "/courses/:courseId",
+        element: (
+            <CourseInfoPage/>
         ),
     },
     {
