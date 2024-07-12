@@ -9,4 +9,9 @@ interface ICourseCard{
     format: string,
 }
 
-export {ICourseCard};
+interface ICoursesWithPage{
+    courses: Array<ICourseCard>,
+    max_page: number,
+}
+
+export {ICourseCard, ICoursesWithPage};

@@ -2,11 +2,12 @@ import DefaultLayout from "../../layouts/default-layout";
 import CoursesFilter from "../../components/course-filter";
 import React from "react";
 import {ICourseFilters} from "../../types/filters.ts";
-import {Flex, Grid, Space, Stack, Text, Title} from "@mantine/core";
+import {Flex, Grid, Pagination, Space, Stack, Text, Title} from "@mantine/core";
 import CourseCard from "../../components/course-card";
 import {useSearchParams} from "react-router-dom";
 import {useCourses} from "../../hooks/courses";
 import EmptyCourseCard from "../../components/empty-course-card";
+import {ICoursesWithPage} from "../../types/courses.ts";
 
 
 export default function CoursesPage(){
@@ -17,7 +18,8 @@ export default function CoursesPage(){
         terms: search.getAll("term"),
         formats: search.getAll("format"),
     }
-    const {data, isSuccess, isFetching} = useCourses(initialFilters);
+    const page = search.get("page") != null? +search.get("page"): 1
+    const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page});
 
     const applyFilters = (filters: ICourseFilters) => {
         setSearch({
@@ -25,8 +27,19 @@ export default function CoursesPage(){
             role: filters.roles,
             term: filters.terms,
             format: filters.formats,
+            page: "1",
         });
     }
+    const setPage = (value: number) => {
+        setSearch({
+            implementer: initialFilters.implementers,
+            role: initialFilters.roles,
+            term: initialFilters.terms,
+            format: initialFilters.formats,
+            page: value.toString()
+        });
+    }
+
     return (
         <>
             <DefaultLayout>
@@ -37,22 +50,22 @@ export default function CoursesPage(){
                     <Grid.Col span={{xs: 12, sm: 8, md: 9, lg: 10}}>
                         <Grid gutter="sm">
                             {
-                                !isFetching && isSuccess && data.map(card => (
+                                !isFetching && isSuccess && (data as ICoursesWithPage).courses.map(card => (
                                     <Grid.Col span={{ xs: 12, md: 6, lg: 4 }} key={card.id}>
                                         <CourseCard card={card}/>
                                     </Grid.Col>
                                 ))
                             }
                             {
-                                !isFetching && isSuccess && data.length === 0 && (
+                                !isFetching && isError && (
                                     <Grid.Col span={{ xs: 12}}>
                                         <Stack gap={"xs"}>
-                                            <Space h="xl" />
+                                            <Space h="lg" />
                                             <Title order={3} ta={"center"}>
-                                                Похоже ничего не нашлось...
+                                                Похоже, ничего не нашлось...
                                             </Title>
                                             <Text c="dimmed" size="lg" ta={"center"}>
-                                                Попробуйте изменить параметры поиска
+                                                Попробуйте изменить фильтры
                                             </Text>
                                         </Stack>
                                     </Grid.Col>
@@ -66,6 +79,24 @@ export default function CoursesPage(){
                                 ))
                             }
                         </Grid>
+                        {
+                            !isFetching && isSuccess && (
+
+                                <Flex
+                                    justify="center"
+                                    align="center"
+                                    direction={"column"}
+                                >
+                                    <Space h="xl"/>
+                                    <Pagination
+                                        color="black"
+                                        total={(data as ICoursesWithPage).max_page}
+                                        value={page}
+                                        onChange={setPage} size="md"
+                                    />
+                                </Flex>
+                            )
+                        }
                     </Grid.Col>
                 </Grid>
             </DefaultLayout>
