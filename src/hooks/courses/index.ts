@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getCourses} from "../../api/courses";
+import {getCourseById, getCourses} from "../../api/courses";
 import {ICourseFilters} from "../../types/filters.ts";
 
 const useCourses = (filters: ICourseFilters & {page: number}) => {
@@ -12,5 +12,15 @@ const useCourses = (filters: ICourseFilters & {page: number}) => {
     )
 };
 
+const useCourseById = (courseId: string) => {
+    return useQuery(
+        {
+            queryKey: ["courses", courseId],
+            queryFn: () => getCourseById(courseId),
+            staleTime: 1000 * 60 * 10,
+        }
+    )
+};
 
-export {useCourses};
+
+export {useCourses, useCourseById};

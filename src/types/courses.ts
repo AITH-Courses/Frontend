@@ -14,4 +14,27 @@ interface ICoursesWithPage{
     max_page: number,
 }
 
-export {ICourseCard, ICoursesWithPage};
+interface ICourseInfo{
+    id: string,
+    name: string,
+    image_url: string,
+    limits: number | null,
+    is_draft: boolean,
+
+    prerequisites: string | null,
+    description: string | null,
+    topics: string | null,
+    assessment: string | null,
+    resources: string | null,
+    extra: string | null,
+
+    author: string,
+    implementer: string,
+    format: string,
+    terms: string,
+    roles: Array<string>,
+    periods: Array<string>,
+    last_runs: Array<string>,
+}
+
+export {ICourseCard, ICoursesWithPage, ICourseInfo};
