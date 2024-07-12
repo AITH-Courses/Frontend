@@ -21,7 +21,7 @@ main{
 }
 @media (max-width: 700px) {
     main{
-        width: 95%;
+        width: 80%;
         margin: 32px auto 32px;
     }
 }
