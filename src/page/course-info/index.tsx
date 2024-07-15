@@ -1,13 +1,31 @@
 import DefaultLayout from "../../layouts/default-layout";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useCourseById} from "../../hooks/courses";
 import {ICourseInfo} from "../../types/courses.ts";
-import {Grid, Image, Skeleton, Space, Stack, Tabs, Text} from "@mantine/core";
+import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button} from "@mantine/core";
 import React from "react";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
-    const {data, isFetching, isSuccess} = useCourseById(courseId.toString())
+    const {data, isFetching, isSuccess, isError} = useCourseById(courseId.toString())
+
+    const navigate = useNavigate();
+
+    if (isError){
+        return (
+            <DefaultLayout>
+                <Stack align="flex-start">
+                    <Text c="black" size="lg" ta="left" >
+                        Такого курса не существует или он скрыт организаторами
+                    </Text>
+                    <Button variant="filled" size="sm" color="black" onClick={() => navigate("/courses")}>
+                        Перейти к доступным курсам
+                    </Button>
+                </Stack>
+            </DefaultLayout>
+        )
+    }
+
     return <DefaultLayout>
         <Grid gutter="xs" columns={24}>
             <Grid.Col span={{ base: 24, md: 8, lg: 6 }}>
