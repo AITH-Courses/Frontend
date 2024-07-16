@@ -8,6 +8,8 @@ import router from "./router";
 import './index.css'
 import './reset.css'
 import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications'
+import '@mantine/notifications/styles.css';
 
 const theme = createTheme({
     fontFamily: 'Manrope, sans-serif',
@@ -27,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <MantineProvider theme={theme} withGlobalClasses>
             <QueryClientProvider client={queryClient}>
+                <Notifications />
                 <RouterProvider router={router} />
                 <ReactQueryDevtools initialIsOpen />
             </QueryClientProvider>
