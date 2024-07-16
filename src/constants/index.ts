@@ -6,11 +6,12 @@ const FORMATS = [
 ];
 const TERMS = ["1", "2", "3", "4"];
 const ROLES = ["ML Engineer", "AI Architect", "Data Analyst", "AI Product Manager", "Data Engineer"]
+
+const LAST_RUNS = ["Осень 2022", "Весна 2023", "Осень 2023", "Весна 2024", "Осень 2024", "Весна 2025"]
+const PERIODS_ONE_TERM = "весь семестр"
 const PERIODS = [
-    "сентябрь", "октябрь", "ноябрь",
-    "декабрь", "январь", "февраль",
-    "март", "апрель", "май",
-    "июнь", "весь семестр",
+    PERIODS_ONE_TERM, "сентябрь", "октябрь", "ноябрь", "декабрь",
+    "январь", "февраль", "март", "апрель", "май", "июнь",
 ]
 
 const SHORT_ROLES_MAP = {
@@ -20,4 +21,4 @@ const SHORT_ROLES_MAP = {
     "AI Product Manager": "AIPM",
     "Data Engineer": "DE",
 }
-export {IMPLEMENTERS, FORMATS, TERMS, ROLES, PERIODS, SHORT_ROLES_MAP};
+export {IMPLEMENTERS, FORMATS, TERMS, ROLES, PERIODS, PERIODS_ONE_TERM, SHORT_ROLES_MAP, LAST_RUNS};
