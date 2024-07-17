@@ -6,6 +6,8 @@ import {Page404} from "../page/404";
 import UserProfilePage from "../page/user-profile";
 import CoursesPage from "../page/courses";
 import CourseInfoPage from "../page/course-info";
+import AdminCourseEditorPage from "../page/admin-course-editor";
+import AdminCoursesPage from "../page/admin-courses";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +40,19 @@ const router = createBrowserRouter([
             <CourseInfoPage/>
         ),
     },
+    {
+        path: "/admin/courses/:courseId",
+        element: (
+            <AdminCourseEditorPage/>
+        ),
+    },
+    {
+        path: "/admin/courses",
+        element: (
+            <AdminCoursesPage/>
+        ),
+    },
+
     {
         path: "*",
         element: (
