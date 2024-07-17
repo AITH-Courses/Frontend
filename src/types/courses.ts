@@ -37,4 +37,7 @@ interface ICourseInfo{
     last_runs: Array<string>,
 }
 
-export {ICourseCard, ICoursesWithPage, ICourseInfo};
+type IUpdateCourseInfo = Omit<ICourseInfo, "id">;
+
+
+export {ICourseCard, ICoursesWithPage, ICourseInfo, IUpdateCourseInfo};
