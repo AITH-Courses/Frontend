@@ -1,10 +1,10 @@
-.default-layout{
+.admin-layout{
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100vh;
 }
-.default-layout__header{
+.admin-layout__header{
     padding: 32px 32px 0;
 }
 

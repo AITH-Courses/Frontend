@@ -12,6 +12,11 @@ interface IAuthToken{
 interface ISuccessOperation{
     message: string
 }
+interface ICreatedCourse{
+    course_id: string
+}
+
+
 
 interface IFailedOperation{
     message: string
@@ -30,4 +35,4 @@ interface IUser{
     role: string,
 }
 
-export {IRegisterTalent, IAuthToken, ILoginUser, IUser, ISuccessOperation, IFailedOperation};
+export {IRegisterTalent, IAuthToken, ILoginUser, IUser, ISuccessOperation, IFailedOperation, ICreatedCourse};

@@ -6,8 +6,18 @@ import {IconChevronDown} from "@tabler/icons-react";
 import {useLogout, useMe} from "../../hooks/auth";
 import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
 import "./index.css";
+import React from "react";
 
-const Header = () => {
+interface Link{
+    name: string
+    url: string
+}
+interface HeaderProps {
+    links: Array<Link>
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
+    const {links} = props;
     const navigate = useNavigate();
     const {data: user, isSuccess, isError, isFetching} = useMe();
     const {mutate, isSuccess: isSuccessLogout, isError: isErrorLogout} = useLogout();
@@ -28,12 +38,13 @@ const Header = () => {
                     </Link>
 
                     <Group h="100%" gap={0} visibleFrom="sm">
-                        <NavLink className={"navbar__link"} to={"/"}>
-                            Главная
-                        </NavLink>
-                        <NavLink className={"navbar__link"} to={"/courses"}>
-                            Курсы
-                        </NavLink>
+                        {
+                            links.map(link => (
+                                <NavLink className={"navbar__link"} to={link.url} end>
+                                    {link.name}
+                                </NavLink>
+                            ))
+                        }
                     </Group>
 
                     {
@@ -62,10 +73,10 @@ const Header = () => {
                         : isError || isFetching
                         ? (
                             <Group visibleFrom="sm">
-                                <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="dark">
+                                <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="black">
                                     Sign in
                                 </Button>
-                                <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="dark">
+                                <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="black">
                                     Sign up
                                 </Button>
                             </Group>
@@ -90,12 +101,13 @@ const Header = () => {
                         justify="center"
                         gap="xs"
                     >
-                        <NavLink className={"navbar__link"} to={"/"}>
-                            Главная
-                        </NavLink>
-                        <NavLink className={"navbar__link"} to={"/courses"}>
-                            Курсы
-                        </NavLink>
+                        {
+                            links.map(link => (
+                                <NavLink className={"navbar__link"} to={link.url} end>
+                                    {link.name}
+                                </NavLink>
+                            ))
+                        }
                     </Stack>
                     <Divider my="sm" />
                     {
@@ -117,8 +129,8 @@ const Header = () => {
                         : isError
                             ? (
                                 <Group justify="center" grow pb="xl" px="md">
-                                    <Button radius={100} size="sm" variant="outline" color="dark">Log in</Button>
-                                    <Button radius={100} size="sm" variant="filled" color="dark">Sign up</Button>
+                                    <Button radius={100} size="sm" variant="outline" color="black">Log in</Button>
+                                    <Button radius={100} size="sm" variant="filled" color="black">Sign up</Button>
                                 </Group>
                             )
                             : null
