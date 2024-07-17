@@ -142,7 +142,9 @@ const CourseInfoPage = () => {
                             ? (
                                 <div>
                                     <Text fw={600} fz={"h3"}>Пререквизиты</Text>
-                                    <div dangerouslySetInnerHTML={{ __html:  data.prerequisites}} />
+                                    <p style={{whiteSpace: "pre"}}>
+                                        {data.prerequisites}
+                                    </p>
                                 </div>
                             )
                             : null
@@ -158,7 +160,9 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Описание</Text>
-                                        <div dangerouslySetInnerHTML={{ __html:  data.description}} />
+                                        <p style={{whiteSpace: "pre"}}>
+                                            {data.description}
+                                        </p>
                                     </div>
                                 )
                                 : null
@@ -174,7 +178,9 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Изучаемые темы</Text>
-                                        <div dangerouslySetInnerHTML={{ __html:  data.topics}} />
+                                        <p style={{whiteSpace: "pre"}}>
+                                            {data.topics}
+                                        </p>
                                     </div>
                                 )
                                 : null
@@ -190,7 +196,9 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Оценивание</Text>
-                                        <div dangerouslySetInnerHTML={{ __html:  data.assessment}} />
+                                        <p style={{whiteSpace: "pre"}}>
+                                            {data.assessment}
+                                        </p>
                                     </div>
                                 )
                                 : null
@@ -206,7 +214,9 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Рекомендуемые источники</Text>
-                                        <div dangerouslySetInnerHTML={{ __html:  data.resources}} />
+                                        <p style={{whiteSpace: "pre"}}>
+                                            {data.resources}
+                                        </p>
                                     </div>
                                 )
                                 : null
@@ -222,7 +232,9 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Дополнительная информация</Text>
-                                        <div dangerouslySetInnerHTML={{ __html:  data.extra}} />
+                                        <p style={{whiteSpace: "pre"}}>
+                                            {data.extra}
+                                        </p>
                                     </div>
                                 )
                                 : null
