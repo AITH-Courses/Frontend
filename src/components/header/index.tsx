@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                     <Group h="100%" gap={0} visibleFrom="sm">
                         {
                             links.map(link => (
-                                <NavLink className={"navbar__link"} to={link.url} end>
+                                <NavLink key={link.name} className={"navbar__link"} to={link.url} end>
                                     {link.name}
                                 </NavLink>
                             ))
@@ -103,7 +103,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                     >
                         {
                             links.map(link => (
-                                <NavLink className={"navbar__link"} to={link.url} end>
+                                <NavLink key={link.name} className={"navbar__link"} to={link.url} end>
                                     {link.name}
                                 </NavLink>
                             ))
