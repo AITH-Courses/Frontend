@@ -8,8 +8,15 @@ import CoursesPage from "../page/courses";
 import CourseInfoPage from "../page/course-info";
 import AdminCourseEditorPage from "../page/admin-course-editor";
 import AdminCoursesPage from "../page/admin-courses";
+import HomePage from "../page/home";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: (
+            <HomePage/>
+        ),
+    },
     {
         path: "/login",
         element: (
