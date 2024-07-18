@@ -74,10 +74,10 @@ const Header: React.FC<HeaderProps> = (props) => {
                         ? (
                             <Group visibleFrom="sm">
                                 <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="black">
-                                    Sign in
+                                    Войти
                                 </Button>
                                 <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="black">
-                                    Sign up
+                                    Регистрация
                                 </Button>
                             </Group>
                         )
@@ -129,8 +129,8 @@ const Header: React.FC<HeaderProps> = (props) => {
                         : isError
                             ? (
                                 <Group justify="center" grow pb="xl" px="md">
-                                    <Button radius={100} size="sm" variant="outline" color="black">Log in</Button>
-                                    <Button radius={100} size="sm" variant="filled" color="black">Sign up</Button>
+                                    <Button radius={100} size="sm" variant="outline" color="black">Войти</Button>
+                                    <Button radius={100} size="sm" variant="filled" color="black">Регистрация</Button>
                                 </Group>
                             )
                             : null
