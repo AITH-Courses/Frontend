@@ -7,7 +7,7 @@ import {
     updateCourseById,
     getCourseById,
     getCourses,
-    createCourse, createCourseLogo
+    createCourse
 } from "../../api/admin/courses.ts";
 import { notifications } from '@mantine/notifications';
 import {MantineColor} from "@mantine/core";
@@ -15,6 +15,7 @@ import {useNavigate} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {AxiosError} from "axios";
 import {IFailedOperation, ISuccessOperation} from "../../types/base.ts";
+import {createCourseLogo} from "../../api/admin/course-logo.ts";
 
 
 const useCourses = () => {
@@ -225,7 +226,7 @@ const useCreateCourseLogo = () => {
                 notifications.show({
                     color: "green" as MantineColor,
                     title: "Успешно!",
-                    message: "Логотип добавлен",
+                    message: "Логотип загружен. Не забудьте сохранить изменения.",
                     position: "top-right",
                     autoClose: 1500,
                 })
