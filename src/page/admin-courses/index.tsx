@@ -33,7 +33,7 @@ const AdminCoursesPage = () => {
     if (isFetching) {
         return <AdminLayout>
             <Skeleton h={36}/>
-            <Space/>
+            <Space h={"sm"}/>
             <Skeleton h={200}/>
         </AdminLayout>
     }
