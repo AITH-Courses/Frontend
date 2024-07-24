@@ -1,7 +1,6 @@
 import axiosInstance from "../axios.ts";
 import {ICourseCard, ICourseInfo, IUpdateCourseInfo} from "../../types/courses.ts";
-import {ISuccessOperation} from "../../types/auth.ts";
-
+import {ISuccessOperation} from "../../types/base.ts";
 
 const URL = {
     CREATE_COURSE: "/admin/courses",
