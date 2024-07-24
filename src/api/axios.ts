@@ -2,10 +2,11 @@ import axios from 'axios';
 import {AUTH_TOKEN_KEY} from "./constants.ts";
 
 
+const MODE = import.meta.env.VITE_APPLICATION_MODE;
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: MODE === "dev"? API_BASE_URL: undefined,
     withCredentials: true,
 });
 
