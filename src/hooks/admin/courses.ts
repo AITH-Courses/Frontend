@@ -1,4 +1,4 @@
-import {ICourseInfo} from "../../types/courses.ts";
+import {ICourseInfo, ICreatedCourse} from "../../types/courses.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {
     deleteCourseById,
@@ -7,14 +7,14 @@ import {
     updateCourseById,
     getCourseById,
     getCourses,
-    createCourse
+    createCourse, createCourseLogo
 } from "../../api/admin/courses.ts";
-import {ICreatedCourse, IFailedOperation, ISuccessOperation} from "../../types/auth.ts";
 import { notifications } from '@mantine/notifications';
 import {MantineColor} from "@mantine/core";
 import {useNavigate} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {AxiosError} from "axios";
+import {IFailedOperation, ISuccessOperation} from "../../types/base.ts";
 
 
 const useCourses = () => {
@@ -195,4 +195,43 @@ const useCreateCourse = () => {
     )
 };
 
-export {useCourseById, useUpdateCourse, useDeleteCourse, usePublishCourse, useHideCourse, useCourses, useCreateCourse};
+const useCreateCourseLogo = () => {
+    return useMutation(
+        {
+            mutationKey: ["create_course_logo"],
+            mutationFn: (file: File) => createCourseLogo(file),
+            onError: (error: AxiosError) => {
+                if (error.response === undefined){
+                    notifications.show({
+                        color: "red" as MantineColor,
+                        title: "Ошибка!",
+                        message: "Что-то",
+                        position: "top-right",
+                        autoClose: 3000,
+                    })
+                } else {
+                    const data = error.response.data as IFailedOperation;
+                    notifications.show({
+                        color: "red" as MantineColor,
+                        title: "Ошибка!",
+                        message: data.message,
+                        position: "top-right",
+                        autoClose: 3000,
+                    })
+                }
+
+            },
+            onSuccess: () => {
+                notifications.show({
+                    color: "green" as MantineColor,
+                    title: "Успешно!",
+                    message: "Логотип добавлен",
+                    position: "top-right",
+                    autoClose: 1500,
+                })
+            },
+        }
+    )
+};
+
+export {useCourseById, useUpdateCourse, useDeleteCourse, usePublishCourse, useHideCourse, useCourses, useCreateCourse, useCreateCourseLogo};

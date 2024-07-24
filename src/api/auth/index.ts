@@ -1,5 +1,6 @@
 import axiosInstance from "../axios.ts";
-import {IAuthToken, ILoginUser, IRegisterTalent, ISuccessOperation, IUser} from "../../types/auth.ts";
+import {IAuthToken, ILoginUser, IRegisterTalent, IUser} from "../../types/auth.ts";
+import {ISuccessOperation} from "../../types/base.ts";
 
 
 const URL = {

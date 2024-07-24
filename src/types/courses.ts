@@ -39,5 +39,12 @@ interface ICourseInfo{
 
 type IUpdateCourseInfo = Omit<ICourseInfo, "id">;
 
+interface ICreatedCourse{
+    course_id: string
+}
 
-export {ICourseCard, ICoursesWithPage, ICourseInfo, IUpdateCourseInfo};
+interface ICreatedCourseLogo{
+    URL: string
+}
+
+export {ICourseCard, ICoursesWithPage, ICourseInfo, IUpdateCourseInfo, ICreatedCourse, ICreatedCourseLogo};

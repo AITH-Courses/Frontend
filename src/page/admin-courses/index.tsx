@@ -44,7 +44,7 @@ const AdminCoursesPage = () => {
         >
             <Table.Td>
                 <Anchor component="button" fz="sm" onClick={() => navigate("/admin/courses/" + course.id)}>
-                    <Text fw={700}>{course.name}</Text>
+                    <Text ta="left" fw={700}>{course.name}</Text>
                 </Anchor>
             </Table.Td>
             <Table.Td>

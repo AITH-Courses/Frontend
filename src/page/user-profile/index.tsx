@@ -2,9 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Stack, Skeleton, Button, Fieldset, TextInput, SimpleGrid, Text, Title, Space} from "@mantine/core";
 import DefaultLayout from "../../layouts/default-layout";
 import {useMe} from "../../hooks/auth";
-import {IFailedOperation, IUser} from "../../types/auth.ts";
+import {IUser} from "../../types/auth.ts";
 import axios, {AxiosError} from "axios";
 import {useNavigate} from "react-router-dom";
+import {IFailedOperation} from "../../types/base.ts";
 
 
 

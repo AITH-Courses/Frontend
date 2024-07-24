@@ -4,8 +4,9 @@ import {Input, TextInput, Stack, PasswordInput, Container, Title, Space, Button,
 import {Link, useNavigate} from "react-router-dom";
 import {useLogin} from "../../hooks/auth";
 import axios, {AxiosError} from "axios";
-import {IAuthToken, IFailedOperation, ILoginUser} from "../../types/auth.ts";
+import {IAuthToken, ILoginUser} from "../../types/auth.ts";
 import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
+import {IFailedOperation} from "../../types/base.ts";
 
 
 const initialLoginData: ILoginUser = {
