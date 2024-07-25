@@ -116,6 +116,17 @@ const CourseInfoPage = () => {
                                 )
                                 : null
                     }
+                    {
+                        isFetching
+                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            : isSuccess
+                                ?  (
+                                    <Text size="lg">
+                                        Автор(ы): {(data as ICourseInfo).author}
+                                    </Text>
+                                )
+                                : null
+                    }
             </Grid.Col>
         </Grid>
         <Space h="sm"/>
