@@ -346,6 +346,36 @@ const AdminCourseEditorPage = () => {
                 <Stack px={16} pt={16}>
                     {
                         isFetching
+                            ? (
+                                <div>
+                                    <Skeleton height={50} width={"100%"} radius="sm" />
+                                </div>
+                            )
+                            : isSuccess
+                                ? (
+                                    <Stack gap={"xs"}>
+                                        <Text fw={600} fz={"h3"}>Преподаватель</Text>
+                                        <Text c="dimmed" size="lg" ta="left" >
+                                            Имя, фамилия опционально отчетство преподавателя.
+                                            Какая учёная степень или должность на текущей работе.
+                                            В каких компаниях/проектах работал преподаватель.
+                                            Если преподавателей несколько указать краткую информацию о каждом
+                                        </Text>
+                                        <Textarea
+                                            size="md"
+                                            radius="md"
+                                            placeholder="Начните печатать здесь..."
+                                            autosize
+                                            minRows={2}
+                                            value={courseInfo? (courseInfo as ICourseInfo).author: ""}
+                                            onChange={(e) => setCourseInfo({...(courseInfo as ICourseInfo), author: e.currentTarget.value})}
+                                        />
+                                    </Stack>
+                                )
+                                : null
+                    }
+                    {
+                        isFetching
                         ? (
                             <div>
                                 <Skeleton height={50} width={"100%"} radius="sm" />
