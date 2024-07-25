@@ -24,6 +24,9 @@ export default function UserProfilePage(){
         }
         navigate("/login");
     }
+    if (isSuccess && user && user.role === "admin"){
+        navigate("/admin/courses");
+    }
 
     useEffect(() => {
         setUser(data as IUser);
