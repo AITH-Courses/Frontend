@@ -6,10 +6,6 @@ import Footer from "../../components/footer";
 
 const DEFAULT_LINKS = [
     {
-        name: "Главная",
-        url: "/"
-    },
-    {
         name: "Курсы",
         url: "/admin/courses"
     },
@@ -22,7 +18,7 @@ export default function AdminLayout(props: LayoutProps){
     return (
         <div className="admin-layout">
             <div className="admin-layout__header">
-                <Header links={DEFAULT_LINKS}/>
+                <Header mainLinks={DEFAULT_LINKS} userLinks={DEFAULT_LINKS}/>
             </div>
             <main>
                 {props.children}

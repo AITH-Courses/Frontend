@@ -23,6 +23,7 @@ const CourseCard :React.FC<CourseCardProps> = (props) => {
                     radius="lg"
                     src={card.image_url}
                     alt="Re"
+                    h={"200px"}
                     fallbackSrc="https://placehold.co/1280x720?text=Нет+логотипа"
                 />
             </Card.Section>

@@ -13,11 +13,12 @@ interface Link{
     url: string
 }
 interface HeaderProps {
-    links: Array<Link>
+    mainLinks: Array<Link>
+    userLinks: Array<Link>
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
-    const {links} = props;
+    const {mainLinks, userLinks} = props;
     const navigate = useNavigate();
     const {data: user, isSuccess, isError, isFetching} = useMe();
     const {mutate, isSuccess: isSuccessLogout, isError: isErrorLogout} = useLogout();
@@ -39,7 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 
                     <Group h="100%" gap={0} visibleFrom="sm">
                         {
-                            links.map(link => (
+                            mainLinks.map(link => (
                                 <NavLink key={link.name} className={"navbar__link"} to={link.url} end>
                                     {link.name}
                                 </NavLink>
@@ -60,9 +61,13 @@ const Header: React.FC<HeaderProps> = (props) => {
                                         </div>
                                     </Menu.Target>
                                     <Menu.Dropdown>
-                                        <Menu.Item style={{minWidth: "120px"}} onClick={() => navigate("/profile")}>
-                                            Мой профиль
-                                        </Menu.Item>
+                                        {
+                                            userLinks.map(link => (
+                                                <Menu.Item style={{minWidth: "120px"}} onClick={() => navigate(link.url)}>
+                                                    {link.name}
+                                                </Menu.Item>
+                                            ))
+                                        }
                                         <Menu.Item style={{minWidth: "120px"}} onClick={mutate}>
                                             Выйти
                                         </Menu.Item>
@@ -102,7 +107,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                         gap="xs"
                     >
                         {
-                            links.map(link => (
+                            mainLinks.map(link => (
                                 <NavLink key={link.name} className={"navbar__link"} to={link.url} end>
                                     {link.name}
                                 </NavLink>
@@ -118,9 +123,13 @@ const Header: React.FC<HeaderProps> = (props) => {
                                 justify="center"
                                 gap="xs"
                             >
-                                <NavLink className={"navbar__link"} to={"/profile"}>
-                                    {user.firstname} {user.lastname}
-                                </NavLink>
+                                {
+                                    userLinks.filter(link => !mainLinks.includes(link)).map(link => (
+                                        <NavLink className={"navbar__link"} to={link.url}>
+                                            {link.name}
+                                        </NavLink>
+                                    ))
+                                }
                                 <div className={"navbar__link"} onClick={mutate}>
                                     Выйти
                                 </div>

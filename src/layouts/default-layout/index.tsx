@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 
-const DEFAULT_LINKS = [
+const MAIN_LINKS = [
     {
         name: "Главная",
         url: "/"
@@ -14,6 +14,13 @@ const DEFAULT_LINKS = [
         url: "/courses"
     },
 ]
+const USER_LINKS = [
+    {
+        name: "Мой профиль",
+        url: "/profile"
+    },
+]
+
 export interface LayoutProps  {
     children: React.ReactNode
 }
@@ -22,7 +29,7 @@ export default function DefaultLayout(props: LayoutProps){
     return (
         <div className="default-layout">
             <div className="default-layout__header">
-                <Header links={DEFAULT_LINKS}/>
+                <Header mainLinks={MAIN_LINKS} userLinks={USER_LINKS}/>
             </div>
             <main>
                 {props.children}

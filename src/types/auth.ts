@@ -9,19 +9,6 @@ interface IAuthToken{
     auth_token: string
 }
 
-interface ISuccessOperation{
-    message: string
-}
-interface ICreatedCourse{
-    course_id: string
-}
-
-
-
-interface IFailedOperation{
-    message: string
-}
-
 interface ILoginUser{
     email: string,
     password: string,
@@ -35,4 +22,4 @@ interface IUser{
     role: string,
 }
 
-export {IRegisterTalent, IAuthToken, ILoginUser, IUser, ISuccessOperation, IFailedOperation, ICreatedCourse};
+export {IRegisterTalent, IAuthToken, ILoginUser, IUser};

@@ -4,8 +4,9 @@ import {TextInput, Stack, PasswordInput, Container, Title, Space, Button, Text, 
 import {Link, useNavigate} from "react-router-dom";
 import {useRegistration} from "../../hooks/auth";
 import axios, {AxiosError} from "axios";
-import {IAuthToken, IFailedOperation, IRegisterTalent} from "../../types/auth.ts";
+import {IAuthToken, IRegisterTalent} from "../../types/auth.ts";
 import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
+import {IFailedOperation} from "../../types/base.ts";
 
 
 const initialRegisterData: IRegisterTalent = {

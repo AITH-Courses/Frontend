@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {ICourseInfo} from "../../types/courses.ts";
+import {ICourseInfo, ICreatedCourseLogo} from "../../types/courses.ts";
 import {
     Grid,
     Image,
@@ -12,13 +12,21 @@ import {
     Select,
     MultiSelect,
     TextInput,
-    Group, NumberInput, Checkbox, Divider, Textarea
+    Group, NumberInput, Checkbox, Divider, Textarea, FileInput, rem, ImageProps
 } from "@mantine/core";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useMe} from "../../hooks/auth";
 import {FORMATS, IMPLEMENTERS, ROLES, LAST_RUNS, PERIODS} from "../../constants";
-import {useDeleteCourse, useHideCourse, usePublishCourse, useUpdateCourse, useCourseById} from "../../hooks/admin/courses.ts";
+import {
+    useDeleteCourse,
+    useHideCourse,
+    usePublishCourse,
+    useUpdateCourse,
+    useCourseById,
+    useCreateCourseLogo
+} from "../../hooks/admin/courses.ts";
 import AdminLayout from "../../layouts/admin-layout";
+import {IconPhoto} from "@tabler/icons-react";
 
 const AdminCourseEditorPage = () => {
     const {courseId} = useParams();
@@ -29,12 +37,21 @@ const AdminCourseEditorPage = () => {
     const {mutateAsync: mutateDelete, isPending: isDeletePending} = useDeleteCourse(courseId.toString())
     const {mutateAsync: mutatePublish, isPending: isPublishPending} = usePublishCourse(courseId.toString())
     const {mutateAsync: mutateHide, isPending: isHidePending} = useHideCourse(courseId.toString())
-
+    const {mutateAsync: mutateCourseLogo, data: courseLogoData} = useCreateCourseLogo()
     const [courseInfo, setCourseInfo] = useState<ICourseInfo | null>(null);
-
+    const imageRef = useRef(null);
     useEffect(() => {
         setCourseInfo(data as ICourseInfo)
     }, [isSuccess, data]);
+
+    useEffect(() => {
+        if (courseLogoData !== undefined){
+            (imageRef.current as ImageProps).src = (courseLogoData as ICreatedCourseLogo).URL
+            setCourseInfo(prevState => ({
+                ...(prevState as ICourseInfo), image_url: (courseLogoData as ICreatedCourseLogo).URL
+            }))
+        }
+    }, [courseLogoData]);
 
     const saveChanges = () => {
         if (courseInfo){
@@ -59,7 +76,6 @@ const AdminCourseEditorPage = () => {
             mutateHide(undefined);
         }
     }
-
 
     if (isNoUserError){
         return (
@@ -100,18 +116,23 @@ const AdminCourseEditorPage = () => {
                     ? <Skeleton height={250} width={"100%"} radius="lg" />
                     : (
                         <Image
+                            ref={imageRef}
                             h={250}
                             radius="lg"
                             src={(data as ICourseInfo).image_url}
-                            alt="Логотип курса"
+                            alt="Изменить логотип курса"
                             fallbackSrc="https://placehold.co/1280x720?text=Нет+логотипа"
                         />
                     )
                 }
-                <Space h={"xs"}/>
-                <Button variant="filled" size="sm" color="dark" fullWidth onClick={() => null}>
-                    Загрузить изображение
-                </Button>
+                <FileInput
+                    color={"black"}
+                    rightSection={<IconPhoto style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
+                    placeholder="Изменить логотип курса"
+                    rightSectionPointerEvents="none"
+                    mt="md"
+                    onChange={mutateCourseLogo}
+                />
                 <Divider my="lg" />
                 <Grid gutter={8}>
                     <Grid.Col span={{ base: 12 }}>
@@ -323,6 +344,36 @@ const AdminCourseEditorPage = () => {
 
             <Tabs.Panel value="info">
                 <Stack px={16} pt={16}>
+                    {
+                        isFetching
+                            ? (
+                                <div>
+                                    <Skeleton height={50} width={"100%"} radius="sm" />
+                                </div>
+                            )
+                            : isSuccess
+                                ? (
+                                    <Stack gap={"xs"}>
+                                        <Text fw={600} fz={"h3"}>Преподаватель</Text>
+                                        <Text c="dimmed" size="lg" ta="left" >
+                                            Имя, фамилия опционально отчетство преподавателя.
+                                            Какая учёная степень или должность на текущей работе.
+                                            В каких компаниях/проектах работал преподаватель.
+                                            Если преподавателей несколько указать краткую информацию о каждом
+                                        </Text>
+                                        <Textarea
+                                            size="md"
+                                            radius="md"
+                                            placeholder="Начните печатать здесь..."
+                                            autosize
+                                            minRows={2}
+                                            value={courseInfo? (courseInfo as ICourseInfo).author: ""}
+                                            onChange={(e) => setCourseInfo({...(courseInfo as ICourseInfo), author: e.currentTarget.value})}
+                                        />
+                                    </Stack>
+                                )
+                                : null
+                    }
                     {
                         isFetching
                         ? (
