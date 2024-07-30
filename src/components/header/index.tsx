@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                                     <Menu.Dropdown>
                                         {
                                             userLinks.map(link => (
-                                                <Menu.Item style={{minWidth: "120px"}} onClick={() => navigate(link.url)}>
+                                                <Menu.Item key={link.url} style={{minWidth: "120px"}} onClick={() => navigate(link.url)}>
                                                     {link.name}
                                                 </Menu.Item>
                                             ))
@@ -125,7 +125,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                             >
                                 {
                                     userLinks.filter(link => !mainLinks.includes(link)).map(link => (
-                                        <NavLink className={"navbar__link"} to={link.url}>
+                                        <NavLink key={link.url} className={"navbar__link"} to={link.url}>
                                             {link.name}
                                         </NavLink>
                                     ))
