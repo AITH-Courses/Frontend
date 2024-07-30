@@ -4,6 +4,7 @@ import {useCourseById} from "../../hooks/courses";
 import {ICourseInfo} from "../../types/courses.ts";
 import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button} from "@mantine/core";
 import React from "react";
+import FeedbackSection from "./feedback-section.tsx";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
@@ -46,7 +47,7 @@ const CourseInfoPage = () => {
             <Grid.Col pt={8} px={16} offset={{xs: 0, md: 1, lg: 1}} span={{ base: 24, md: 15, lg: 17 }}>
                     {
                         isFetching
-                            ? <Skeleton height={34} width={"100%"} radius="lg" />
+                            ? <Skeleton height={34} width={"100%"} radius="sm" />
                             : isSuccess
                                 ?  (
                                     <Text fw={600} fz={"h3"}>
@@ -58,7 +59,12 @@ const CourseInfoPage = () => {
                     <Space h="xs"/>
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? (
+                                <>
+                                <Skeleton height={25} width={"100%"} radius="sm"/>
+                                <Space h={4}/>
+                                </>
+                            )
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -74,7 +80,12 @@ const CourseInfoPage = () => {
                     }
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? (
+                                <>
+                                    <Skeleton height={25} width={"100%"} radius="sm"/>
+                                    <Space h={4}/>
+                                </>
+                            )
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -85,7 +96,12 @@ const CourseInfoPage = () => {
                     }
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? (
+                                <>
+                                    <Skeleton height={25} width={"100%"} radius="sm"/>
+                                    <Space h={4}/>
+                                </>
+                            )
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -96,7 +112,12 @@ const CourseInfoPage = () => {
                     }
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? (
+                                <>
+                                    <Skeleton height={25} width={"100%"} radius="sm"/>
+                                    <Space h={4}/>
+                                </>
+                            )
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -107,7 +128,12 @@ const CourseInfoPage = () => {
                     }
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? (
+                                <>
+                                    <Skeleton height={25} width={"100%"} radius="sm"/>
+                                    <Space h={4}/>
+                                </>
+                            )
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -118,7 +144,7 @@ const CourseInfoPage = () => {
                     }
                     {
                         isFetching
-                            ? <Skeleton height={29} width={"100%"} radius="lg" />
+                            ? <Skeleton height={25} width={"100%"} radius="sm" />
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
@@ -254,11 +280,7 @@ const CourseInfoPage = () => {
             </Tabs.Panel>
 
             <Tabs.Panel value="feedback">
-                <Stack px={16} pt={16}>
-                    <Text fw={600} fz={"h3"}>
-                        Отзывы
-                    </Text>
-                </Stack>
+                <FeedbackSection courseId={courseId.toString()}/>
             </Tabs.Panel>
         </Tabs>
     </DefaultLayout>
