@@ -1,5 +1,5 @@
 import {IFeedback} from "../../types/feedbacks.ts";
-import {ActionIcon, Group, Text} from "@mantine/core";
+import {ActionIcon, Group, Rating, Space, Text} from "@mantine/core";
 import React, {useState} from "react";
 import {IconThumbUp, IconThumbUpFilled, IconThumbDown, IconThumbDownFilled, IconTrash} from "@tabler/icons-react";
 import {useDeleteFeedback, useUnvoteFeedback, useVoteFeedback} from "../../hooks/feedback";
@@ -58,8 +58,13 @@ const FeedbackCard: React.FC<FeedbackCardProps> = (props) => {
 
     return (
         <div style={{display: "flex", flexDirection: "column"}}>
+            <Rating defaultValue={feedback.rating} count={5} readOnly/>
+            <Space h={4}/>
+            <Text c="black" ta={"left"} style={{whiteSpace: "pre"}}>
+                {feedback.text}
+            </Text>
             <Group>
-                <Text c="black" ta={"left"}>
+                <Text c="dimmed" ta={"left"}>
                     {
                         feedback.is_author
                         ? "Ваш отзыв"
@@ -78,9 +83,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = (props) => {
                     ) : null
                 }
             </Group>
-            <Text c="dimmed" ta={"left"} style={{whiteSpace: "pre"}}>
-                {feedback.text}
-            </Text>
+
             <Group>
                 <ActionIcon onClick={like} variant="transparent" color="rgba(0, 0, 0, 1)" size="lg" aria-label="Like">
                     {

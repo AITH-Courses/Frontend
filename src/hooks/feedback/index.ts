@@ -5,6 +5,7 @@ import {useQuery} from "@tanstack/react-query";
 import {AxiosError} from "axios";
 import {IFailedOperation, ISuccessOperation} from "../../types/base.ts";
 import {createFeedback, deleteFeedback, getFeedbacks, unvoteFeedback, voteFeedback} from "../../api/feedback";
+import {ICreateFeedback} from "../../types/feedbacks.ts";
 
 
 const useFeedbacks = (courseId: string) => {
@@ -22,7 +23,7 @@ const useCreateFeedback = (courseId: string) => {
     return useMutation(
         {
             mutationKey: ["courses", courseId, "create_feedback"],
-            mutationFn: (text: string) => createFeedback(courseId, text),
+            mutationFn: (data: ICreateFeedback) => createFeedback(courseId, data),
             onError: (error: AxiosError) => {
                 const data = error.response.data as IFailedOperation;
                 notifications.show({

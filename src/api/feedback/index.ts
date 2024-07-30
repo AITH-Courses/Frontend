@@ -1,5 +1,5 @@
 import axiosInstance from "../axios.ts";
-import {ICreatedFeedback, IFeedback} from "../../types/feedbacks.ts";
+import {ICreatedFeedback, ICreateFeedback, IFeedback} from "../../types/feedbacks.ts";
 import {ISuccessOperation} from "../../types/base.ts";
 
 const URL = {
@@ -15,12 +15,10 @@ const getFeedbacks = (courseId: string) => {
     }).then(res => res.data);
 };
 
-const createFeedback = (courseId: string, text: string) => {
+const createFeedback = (courseId: string, data: ICreateFeedback) => {
     return  axiosInstance.post<ICreatedFeedback>(
         URL.CREATE_FEEDBACK.replace("courseId", courseId),
-        {
-            text: text
-        }
+        data
         ).then(res => res.data);
 };
 
