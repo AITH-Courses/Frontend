@@ -26,6 +26,13 @@ const FeedbackList: React.FC<FeedbackListProps> = (props) => {
     }
 
     if (isFeedbacksSuccess){
+        if ((feedbacks as Array<IFeedback>).length === 0){
+            return (
+                <Text c="black" ta={"center"}>
+                    Пока отзывов нет
+                </Text>
+            )
+        }
         return (feedbacks as Array<IFeedback>).map(
             feedback => <FeedbackCard key={feedback.id} feedback={feedback} courseId={courseId}/>
         )
