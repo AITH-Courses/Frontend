@@ -141,17 +141,16 @@ const AdminCourseEditorPage = () => {
                             ? <Skeleton height={36} width={"100%"} radius="lg" />
                             :courseInfo?.is_draft
                                 ? (
-                                    <Text size="md">
+                                    <Text size="md" ta={"center"}>
                                         Курс скрыт
                                     </Text>
                                 )
                                 : (
-                                    <Text size="md">
+                                    <Text size="md" ta={"center"}>
                                         Курс открыт
                                     </Text>
                                 )
                         }
-
                     </Grid.Col>
                     <Grid.Col span={{ base: 12 }}>
                         {
