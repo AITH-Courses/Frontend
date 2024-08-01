@@ -142,17 +142,6 @@ const CourseInfoPage = () => {
                                 )
                                 : null
                     }
-                    {
-                        isFetching
-                            ? <Skeleton height={25} width={"100%"} radius="sm" />
-                            : isSuccess
-                                ?  (
-                                    <Text size="lg">
-                                        Автор(ы): {(data as ICourseInfo).author}
-                                    </Text>
-                                )
-                                : null
-                    }
             </Grid.Col>
         </Grid>
         <Space h="sm"/>
@@ -170,6 +159,24 @@ const CourseInfoPage = () => {
                 <Stack px={16} pt={16}>
                     {
                         isFetching
+                            ? (
+                                <div>
+                                    <Skeleton height={50} width={"100%"} radius="sm" />
+                                </div>
+                            )
+                            : isSuccess
+                                ? (
+                                    <div>
+                                        <Text fw={600} fz={"h3"}>Авторы</Text>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
+                                            {data.author}
+                                        </p>
+                                    </div>
+                                )
+                                : null
+                    }
+                    {
+                        isFetching
                         ? (
                             <div>
                                 <Skeleton height={50} width={"100%"} radius="sm" />
@@ -179,7 +186,7 @@ const CourseInfoPage = () => {
                             ? (
                                 <div>
                                     <Text fw={600} fz={"h3"}>Пререквизиты</Text>
-                                    <p style={{whiteSpace: "pre"}}>
+                                    <p style={{whiteSpace: "pre-wrap"}}>
                                         {data.prerequisites}
                                     </p>
                                 </div>
@@ -197,7 +204,7 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Описание</Text>
-                                        <p style={{whiteSpace: "pre"}}>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
                                             {data.description}
                                         </p>
                                     </div>
@@ -215,7 +222,7 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Изучаемые темы</Text>
-                                        <p style={{whiteSpace: "pre"}}>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
                                             {data.topics}
                                         </p>
                                     </div>
@@ -233,7 +240,7 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Оценивание</Text>
-                                        <p style={{whiteSpace: "pre"}}>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
                                             {data.assessment}
                                         </p>
                                     </div>
@@ -251,7 +258,7 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Рекомендуемые источники</Text>
-                                        <p style={{whiteSpace: "pre"}}>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
                                             {data.resources}
                                         </p>
                                     </div>
@@ -269,7 +276,7 @@ const CourseInfoPage = () => {
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Дополнительная информация</Text>
-                                        <p style={{whiteSpace: "pre"}}>
+                                        <p style={{whiteSpace: "pre-wrap"}}>
                                             {data.extra}
                                         </p>
                                     </div>
