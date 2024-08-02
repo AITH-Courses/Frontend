@@ -44,40 +44,35 @@ const AdminCoursesPage = () => {
         >
             <Table.Td>
                 <Anchor component="button" fz="sm" onClick={() => navigate("/admin/courses/" + course.id)}>
-                    <Text ta="left" fw={700}>{course.name}</Text>
+                    <Text ta="left" fw={600} c="blue">{course.name}</Text>
                 </Anchor>
-            </Table.Td>
-            <Table.Td>
-                <Badge color="grey" variant="outline">
-                    {
-                        course.is_draft? "Скрыт": "Открыт"
-                    }
-                </Badge>
             </Table.Td>
             <Table.Td visibleFrom={"sm"}>
                 {
                     course.implementer
-                    ? <Badge color="orange" variant="outline">{course.implementer}</Badge>
-                    : "Не указано"
+                    ? <Text ta="left" fz={14} fw={400}>{course.implementer}</Text>
+                    : <Text ta="left" fz={14} fw={400}>{"Не указан"}</Text>
                 }
             </Table.Td>
             <Table.Td visibleFrom={"xs"}>
                 {
                     course.format
-                    ? <Badge color="black" variant="outline">{course.format}</Badge>
-                    : "Не указано"
+                    ? <Text ta="left" fz={14} fw={400}>{course.format}</Text>
+                    : <Text ta="left" fz={14} fw={400}>{"Не указан"}</Text>
                 }
             </Table.Td>
             <Table.Td visibleFrom={"xs"}>
-                <Group>
-                    {course.roles.sort().map(role => (
-                        <Badge color="blue">{role}</Badge>
-                    ))}
-                </Group>
                 {
                     course.roles.length === 0
-                    ? "Не указаны"
-                    : null
+                    ? <Text ta="left" fz={14} fw={400}>{"Не указаны"}</Text>
+                    : <Text ta="left" fz={14} fw={400}>{course.roles.sort().join(", ")}</Text>
+                }
+            </Table.Td>
+            <Table.Td>
+                {
+                    course.is_draft
+                        ? <Badge color="grey" variant="filled">Скрыт</Badge>
+                        : <Badge color="blue" variant="filled">Открыт </Badge>
                 }
             </Table.Td>
         </Table.Tr>
@@ -96,10 +91,10 @@ const AdminCoursesPage = () => {
                 <Table.Thead>
                     <Table.Tr>
                         <Table.Th><Text fw={700}>Название</Text></Table.Th>
-                        <Table.Th><Text fw={700}>Статус</Text></Table.Th>
                         <Table.Th visibleFrom={"sm"}><Text fw={700}>Реализатор</Text></Table.Th>
                         <Table.Th visibleFrom={"xs"}><Text fw={700}>Формат</Text></Table.Th>
                         <Table.Th visibleFrom={"xs"}><Text fw={700}>Роли</Text></Table.Th>
+                        <Table.Th><Text fw={700}>Статус</Text></Table.Th>
                     </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody>{rows}</Table.Tbody>
