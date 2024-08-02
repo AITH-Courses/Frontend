@@ -3,6 +3,7 @@ import {ActionIcon, Group, Rating, Space, Text} from "@mantine/core";
 import React, {useState} from "react";
 import {IconThumbUp, IconThumbUpFilled, IconThumbDown, IconThumbDownFilled, IconTrash} from "@tabler/icons-react";
 import {useDeleteFeedback, useUnvoteFeedback, useVoteFeedback} from "../../hooks/feedback";
+import {formatDate} from "../../utils/date.ts";
 
 interface FeedbackCardProps{
     courseId: string
@@ -72,7 +73,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = (props) => {
                     }
                 </Text>
                 <Text c="dimmed" ta={"left"}>
-                    {feedback.date}
+                    {formatDate(feedback.date)}
                 </Text>
                 {
                     feedback.is_author
