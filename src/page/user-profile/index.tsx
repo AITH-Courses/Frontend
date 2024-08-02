@@ -7,7 +7,7 @@ import axios, {AxiosError} from "axios";
 import {useNavigate} from "react-router-dom";
 import {IFailedOperation} from "../../types/base.ts";
 import AdminLayout from "../../layouts/admin-layout";
-
+import {DatePickerInput} from "@mantine/dates";
 
 
 export default function UserProfilePage(){
@@ -56,6 +56,10 @@ export default function UserProfilePage(){
                         placeholder="Иванов..."
                         value={user.lastname}
                         onChange={e => user && setUser({...user, lastname: e.target.value})}
+                    />
+                    <DatePickerInput
+                        label="Дата рождения"
+                        placeholder="Дата рождения"
                     />
                     <Group justify="flex-end">
                         <Button size="xs" variant="filled" color="dark">

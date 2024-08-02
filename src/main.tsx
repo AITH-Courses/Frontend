@@ -10,6 +10,9 @@ import './reset.css'
 import '@mantine/core/styles.css';
 import { Notifications } from '@mantine/notifications'
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
+import 'dayjs/locale/ru';
+import {DatesProvider} from "@mantine/dates";
 
 const theme = createTheme({
     fontFamily: 'Manrope, sans-serif',
@@ -30,8 +33,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <MantineProvider theme={theme} withGlobalClasses>
             <QueryClientProvider client={queryClient}>
                 <Notifications />
-                <RouterProvider router={router} />
-                <ReactQueryDevtools initialIsOpen />
+                <DatesProvider settings={{ locale: 'ru' }}>
+                    <RouterProvider router={router} />
+                    <ReactQueryDevtools initialIsOpen />
+                </DatesProvider>
             </QueryClientProvider>
         </MantineProvider>
     </React.StrictMode>
