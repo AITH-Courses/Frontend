@@ -202,24 +202,14 @@ const useCreateCourseLogo = () => {
             mutationKey: ["create_course_logo"],
             mutationFn: (file: File) => createCourseLogo(file),
             onError: (error: AxiosError) => {
-                if (error.response === undefined){
-                    notifications.show({
-                        color: "red" as MantineColor,
-                        title: "Ошибка!",
-                        message: "Что-то",
-                        position: "top-right",
-                        autoClose: 3000,
-                    })
-                } else {
-                    const data = error.response.data as IFailedOperation;
-                    notifications.show({
-                        color: "red" as MantineColor,
-                        title: "Ошибка!",
-                        message: data.message,
-                        position: "top-right",
-                        autoClose: 3000,
-                    })
-                }
+                const data = error.response.data as IFailedOperation;
+                notifications.show({
+                    color: "red" as MantineColor,
+                    title: "Ошибка!",
+                    message: data.message || "Внутренняя ошибка сервера",
+                    position: "top-right",
+                    autoClose: 3000,
+                })
 
             },
             onSuccess: () => {

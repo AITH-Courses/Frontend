@@ -131,7 +131,7 @@ const AdminCourseEditorPage = () => {
                     placeholder="Изменить логотип курса"
                     rightSectionPointerEvents="none"
                     mt="md"
-                    onChange={mutateCourseLogo}
+                    onChange={file => file && mutateCourseLogo(file)}
                 />
                 <Divider my="lg" />
                 <Grid gutter={8}>
