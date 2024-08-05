@@ -1,5 +1,5 @@
 import axiosInstance from "../axios.ts";
-import {ICourseCard, ICourseInfo, IUpdateCourseInfo} from "../../types/courses.ts";
+import {ICourseCard, ICourseInfo, ICreatedCourse, IUpdateCourseInfo} from "../../types/courses.ts";
 import {ISuccessOperation} from "../../types/base.ts";
 
 const URL = {
@@ -38,7 +38,7 @@ const hideCourseById = (courseId: string) => {
 };
 
 const createCourse = (courseName: string) => {
-    return axiosInstance.post<ISuccessOperation>(URL.CREATE_COURSE, {name: courseName}).then(res => res.data);
+    return axiosInstance.post<ICreatedCourse>(URL.CREATE_COURSE, {name: courseName}).then(res => res.data);
 };
 
 export {getCourses, getCourseById, updateCourseById, deleteCourseById, publishCourseById, hideCourseById, createCourse};
