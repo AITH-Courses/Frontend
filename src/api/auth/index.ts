@@ -4,10 +4,10 @@ import {ISuccessOperation} from "../../types/base.ts";
 
 
 const URL = {
-    REGISTER_TALENT: "/auth/register",
-    LOGIN_USER: "/auth/login",
-    LOGOUT_USER: "/auth/logout",
-    CURRENT_USER: "/auth/me",
+    REGISTER_TALENT: "/api/v1/auth/register",
+    LOGIN_USER: "/api/v1/auth/login",
+    LOGOUT_USER: "/api/v1/auth/logout",
+    CURRENT_USER: "/api/v1/auth/me",
 };
 
 const registerTalent = (data: IRegisterTalent) => {

@@ -8,7 +8,7 @@ export const axiosInstance = axios.create({
     withCredentials: false,
 });
 
-const URL_CREATE_COURSE_LOGO = "/admin/images"
+const URL_CREATE_COURSE_LOGO = "/api/v1/admin/images"
 
 const createCourseLogo = (file: File) => {
     const formData = new FormData();

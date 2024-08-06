@@ -5,8 +5,8 @@ import {ICourseInfo, ICoursesWithPage} from "../../types/courses.ts";
 
 
 const URL = {
-    GET_COURSES: "/courses",
-    GET_COURSE: "/courses/",
+    GET_COURSES: "/api/v1/courses",
+    GET_COURSE: "/api/v1/courses/",
 };
 
 const getCourses = (filters: ICourseFilters & {page: number}) => {

@@ -3,11 +3,11 @@ import {ICreatedFeedback, ICreateFeedback, IFeedback} from "../../types/feedback
 import {ISuccessOperation} from "../../types/base.ts";
 
 const URL = {
-    GET_FEEDBACKS: "/courses/courseId/feedbacks",
-    CREATE_FEEDBACK: "/courses/courseId/feedbacks",
-    DELETE_FEEDBACK: "/courses/courseId/feedbacks/feedbackId",
-    VOTE_FEEDBACK: "/courses/courseId/feedbacks/feedbackId/vote",
-    UNVOTE_FEEDBACK: "/courses/courseId/feedbacks/feedbackId/vote",
+    GET_FEEDBACKS: "/api/v1/courses/courseId/feedbacks",
+    CREATE_FEEDBACK: "/api/v1/courses/courseId/feedbacks",
+    DELETE_FEEDBACK: "/api/v1/courses/courseId/feedbacks/feedbackId",
+    VOTE_FEEDBACK: "/api/v1/courses/courseId/feedbacks/feedbackId/vote",
+    UNVOTE_FEEDBACK: "/api/v1/courses/courseId/feedbacks/feedbackId/vote",
 };
 
 const getFeedbacks = (courseId: string) => {

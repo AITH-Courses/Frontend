@@ -3,13 +3,13 @@ import {ICourseCard, ICourseInfo, ICreatedCourse, IUpdateCourseInfo} from "../..
 import {ISuccessOperation} from "../../types/base.ts";
 
 const URL = {
-    CREATE_COURSE: "/admin/courses",
-    GET_COURSES: "/admin/courses",
-    GET_COURSE: "/admin/courses/",
-    UPDATE_COURSE: "/admin/courses/",
-    DELETE_COURSE: "/admin/courses/",
-    PUBLISH_COURSE: "/admin/courses/course_id/published",
-    HIDE_COURSE: "/admin/courses/course_id/published",
+    CREATE_COURSE: "/api/v1/admin/courses",
+    GET_COURSES: "/api/v1/admin/courses",
+    GET_COURSE: "/api/v1/admin/courses/",
+    UPDATE_COURSE: "/api/v1/admin/courses/",
+    DELETE_COURSE: "/api/v1/admin/courses/",
+    PUBLISH_COURSE: "/api/v1/admin/courses/course_id/published",
+    HIDE_COURSE: "/api/v1/admin/courses/course_id/published",
 };
 
 
