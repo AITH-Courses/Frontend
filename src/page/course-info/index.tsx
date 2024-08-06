@@ -68,11 +68,27 @@ const CourseInfoPage = () => {
                             : isSuccess
                                 ?  (
                                     <Text size="lg">
-                                        Реализует {(data as ICourseInfo).implementer}
+                                        Реализатор: {(data as ICourseInfo).implementer}
+                                    </Text>
+                                )
+                                : null
+                    }
+                    {
+                        isFetching
+                            ? (
+                                <>
+                                    <Skeleton height={25} width={"100%"} radius="sm"/>
+                                    <Space h={4}/>
+                                </>
+                            )
+                            : isSuccess
+                                ?  (
+                                    <Text size="lg">
+                                        Лимиты:
                                         {
                                             (data as ICourseInfo).limits == null
-                                                ? " без лимитов"
-                                                : ` с лимитом ${(data as ICourseInfo).limits}`
+                                                ? " нет"
+                                                : ` ${(data as ICourseInfo).limits}`
                                         }
                                     </Text>
                                 )
