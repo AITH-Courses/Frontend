@@ -14,6 +14,11 @@ interface ICoursesWithPage{
     max_page: number,
 }
 
+interface IResource{
+    title: string
+    link: string
+}
+
 interface ICourseInfo{
     id: string,
     name: string,
@@ -25,7 +30,7 @@ interface ICourseInfo{
     description: string | null,
     topics: string | null,
     assessment: string | null,
-    resources: string | null,
+    resources: Array<IResource>,
     extra: string | null,
 
     author: string,
@@ -47,4 +52,4 @@ interface ICreatedCourseLogo{
     URL: string
 }
 
-export {ICourseCard, ICoursesWithPage, ICourseInfo, IUpdateCourseInfo, ICreatedCourse, ICreatedCourseLogo};
+export {ICourseCard, ICoursesWithPage, ICourseInfo, IUpdateCourseInfo, ICreatedCourse, ICreatedCourseLogo, IResource};

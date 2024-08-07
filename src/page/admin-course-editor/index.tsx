@@ -12,7 +12,7 @@ import {
     Select,
     MultiSelect,
     TextInput,
-    Group, NumberInput, Checkbox, Divider, Textarea, FileInput, rem, ImageProps
+    Group, NumberInput, Checkbox, Divider, Textarea, ImageProps, FileButton
 } from "@mantine/core";
 import React, {useState, useEffect, useRef} from "react";
 import {useMe} from "../../hooks/auth";
@@ -26,7 +26,7 @@ import {
     useCreateCourseLogo
 } from "../../hooks/admin/courses.ts";
 import AdminLayout from "../../layouts/admin-layout";
-import {IconPhoto} from "@tabler/icons-react";
+import CourseResourcesEditor from "../../components/course-resources-editor";
 
 const AdminCourseEditorPage = () => {
     const {courseId} = useParams();
@@ -125,14 +125,20 @@ const AdminCourseEditorPage = () => {
                         />
                     )
                 }
-                <FileInput
-                    color={"black"}
-                    rightSection={<IconPhoto style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
-                    placeholder="Изменить логотип курса"
-                    rightSectionPointerEvents="none"
-                    mt="md"
-                    onChange={file => file && mutateCourseLogo(file)}
-                />
+                <Group justify="center" mt="md">
+                    <FileButton onChange={file => file && mutateCourseLogo(file)} accept="image/png,image/jpeg">
+                        {(props) => (
+                            <Button
+                                fullWidth
+                                onClick={props.onClick}
+                                color="gray"
+                                variant="outline"
+                            >
+                                Изменить логотип курса
+                            </Button>
+                        )}
+                    </FileButton>
+                </Group>
                 <Divider my="lg" />
                 <Grid gutter={8}>
                     <Grid.Col span={{ base: 12 }}>
@@ -489,21 +495,16 @@ const AdminCourseEditorPage = () => {
                                     <Skeleton height={150} width={"100%"} radius="sm" />
                                 </div>
                             )
-                            : isSuccess
+                            : isSuccess && courseInfo
                                 ? (
                                     <Stack gap={"xs"}>
                                         <Text fw={600} fz={"h3"}>Рекомендуемые источники</Text>
                                         <Text c="dimmed" size="lg" ta="left" >
                                             Какими источниками вдохновлен курс (книги, статьи, видео)
                                         </Text>
-                                        <Textarea
-                                            size="md"
-                                            radius="md"
-                                            placeholder="Начните печатать здесь..."
-                                            autosize
-                                            minRows={2}
-                                            value={courseInfo? (courseInfo as ICourseInfo).resources: ""}
-                                            onChange={(e) => setCourseInfo({...(courseInfo as ICourseInfo), resources: e.currentTarget.value})}
+                                        <CourseResourcesEditor
+                                            resources={courseInfo.resources}
+                                            updateResources={(resources) => setCourseInfo(courseInfo && {...courseInfo, resources: resources})}
                                         />
                                     </Stack>
                                 )

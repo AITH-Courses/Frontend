@@ -1,8 +1,8 @@
 import DefaultLayout from "../../layouts/default-layout";
-import {useNavigate, useParams} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useCourseById} from "../../hooks/courses";
 import {ICourseInfo} from "../../types/courses.ts";
-import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button} from "@mantine/core";
+import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button, List} from "@mantine/core";
 import React from "react";
 import FeedbackSection from "./feedback-section.tsx";
 
@@ -270,13 +270,31 @@ const CourseInfoPage = () => {
                                     <Skeleton height={50} width={"100%"} radius="sm" />
                                 </div>
                             )
-                            : isSuccess && (data as ICourseInfo).resources !== null && (data as ICourseInfo).resources !== ""
+                            : isSuccess && data && (data as ICourseInfo).resources.length
                                 ? (
                                     <div>
                                         <Text fw={600} fz={"h3"}>Рекомендуемые источники</Text>
-                                        <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.resources}
-                                        </p>
+                                        <List listStyleType="disc">
+                                            {
+                                                (data as ICourseInfo).resources.map(res => (
+                                                    <List.Item key={res.title}>
+                                                        {
+                                                            res.link.trim() === ""
+                                                            ? (
+                                                                <p>
+                                                                    {res.title}
+                                                                </p>
+                                                            )
+                                                            : (
+                                                                <NavLink to={res.link} target="_blank">
+                                                                    {res.title}
+                                                                </NavLink>
+                                                            )
+                                                        }
+                                                    </List.Item>
+                                                ))
+                                            }
+                                        </List>
                                     </div>
                                 )
                                 : null
