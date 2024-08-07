@@ -12,3 +12,14 @@
     font-size: 20px;
     font-weight: bold;
 }
+.footer__link:active,
+.footer__link{
+    text-decoration: none;
+    color: var(--light-white);
+    font-size: 16px;
+}
+.footer__link:hover{
+    color: var(--orange);
+    transition: background-color 1s;
+    cursor: pointer;
+}

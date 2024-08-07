@@ -1,6 +1,8 @@
 import "./index.css";
 import {SimpleGrid} from "@mantine/core";
 import Logo from "../logo";
+import {ROLES} from "../../constants";
+import {NavLink} from "react-router-dom";
 const Footer = () => {
     return (
         <div className={"footer"}>
@@ -15,15 +17,15 @@ const Footer = () => {
                     <h3 className={"footer__subtitle"}>
                         Курсы по направлениям
                     </h3>
-                    <p className={"footer__text"}>
-                        AI Product Manager
-                    </p>
-                    <p className={"footer__text"}>
-                        ML Engineer
-                    </p>
-                    <p className={"footer__text"}>
-                        Data Engineer
-                    </p>
+                    {
+                        ROLES.map(role => (
+                            <p>
+                                <NavLink key={role} className={"footer__link"} to={`/courses?role=${role}`} end>
+                                    {role}
+                                </NavLink>
+                            </p>
+                        ))
+                    }
                 </div>
             </SimpleGrid>
         </div>

@@ -18,6 +18,7 @@ export default function CoursesPage(){
         terms: search.getAll("term"),
         formats: search.getAll("format"),
     }
+    console.log(JSON.stringify(initialFilters))
     const page = search.get("page") != null? +search.get("page"): 1
     const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page});
 
@@ -45,7 +46,12 @@ export default function CoursesPage(){
             <DefaultLayout>
                 <Grid gutter="xs" align="stretch">
                     <Grid.Col span={{ xs: 12, sm: 4, md: 3, lg: 2 }}>
-                        <CoursesFilter initialFilters={initialFilters} applyFilters={applyFilters} loading={isFetching}/>
+                        <CoursesFilter
+                            key={JSON.stringify(initialFilters)}
+                            initialFilters={initialFilters}
+                            applyFilters={applyFilters}
+                            loading={isFetching}
+                        />
                     </Grid.Col>
                     <Grid.Col span={{xs: 12, sm: 8, md: 9, lg: 10}}>
                         <Grid gutter="sm">
