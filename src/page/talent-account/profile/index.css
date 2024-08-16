@@ -1,0 +1,8 @@
+.block{
+    border-radius: 16px;
+    width: 100%;
+    background: var(--light-white);
+    padding: 32px;
+    height: 100%;
+    position: relative;
+}
