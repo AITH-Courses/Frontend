@@ -7,28 +7,12 @@ import {ICourseCard} from "../../types/courses.ts";
 import {useNavigate} from "react-router-dom";
 import {useDisclosure} from "@mantine/hooks";
 import {CreateCourseModal} from "./modals.tsx";
+import {AxiosError} from "axios/index";
 
 const AdminCoursesPage = () => {
     const [opened, { open, close }] = useDisclosure(false);
     const navigate = useNavigate()
-    const {isError: isNoUserError} = useMe();
-    const {data, isFetching} = useCourses()
-
-    if (isNoUserError){
-        return (
-            <AdminLayout>
-                <Stack align="flex-start">
-                    <Text c="black" size="lg" ta="left" >
-                        Доступ к админ-панели доступен только организаторам
-                    </Text>
-                    <Button variant="filled" size="sm" color="dark" onClick={() => navigate("/login")}>
-                        Войти в аккаунт
-                    </Button>
-                </Stack>
-            </AdminLayout>
-        )
-
-    }
+    const {data, isFetching, isError, error} = useCourses()
 
     if (isFetching) {
         return <AdminLayout>
@@ -36,6 +20,22 @@ const AdminCoursesPage = () => {
             <Space h={"sm"}/>
             <Skeleton h={200}/>
         </AdminLayout>
+    }
+
+    if (isError){
+        if ([403, 401].includes((error as AxiosError).response.status)){
+            navigate("/403");
+        }
+        return (
+            <AdminLayout>
+                <Stack align="flex-start">
+                    <Text c="black" size="lg" ta="left" >
+                        Произошла ошибка при загрузке страницы курсов
+                    </Text>
+                </Stack>
+            </AdminLayout>
+        )
+
     }
 
     const rows = data && (data as Array<ICourseCard>).map((course) => (
