@@ -11,6 +11,7 @@ import HomePage from "../page/home";
 import ProfilePage from "../page/talent-account/profile";
 import FavoriteCoursesPage from "../page/talent-account/favorites";
 import TalentNotificationsPage from "../page/talent-account/notifications";
+import {Page403} from "../page/403";
 
 const router = createBrowserRouter([
     {
@@ -73,7 +74,12 @@ const router = createBrowserRouter([
             <AdminCoursesPage/>
         ),
     },
-
+    {
+        path: "/403",
+        element: (
+            <Page403/>
+        )
+    },
     {
         path: "*",
         element: (
