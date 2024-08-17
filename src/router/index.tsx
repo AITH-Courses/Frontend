@@ -12,6 +12,10 @@ import ProfilePage from "../page/talent-account/profile";
 import FavoriteCoursesPage from "../page/talent-account/favorites";
 import TalentNotificationsPage from "../page/talent-account/notifications";
 import {Page403} from "../page/403";
+import TimetableEditorPage from "../page/course-run/timetable";
+import CourseRunGeneralPage from "../page/course-run/general";
+import CourseRunTimetablePage from "../page/course-run/timetable";
+import CourseRunMembersPage from "../page/course-run/members";
 
 const router = createBrowserRouter([
     {
@@ -66,6 +70,24 @@ const router = createBrowserRouter([
         path: "/admin/courses/:courseId",
         element: (
             <AdminCourseEditorPage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId",
+        element: (
+            <CourseRunGeneralPage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId/timetable",
+        element: (
+            <CourseRunTimetablePage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId/members",
+        element: (
+            <CourseRunMembersPage/>
         ),
     },
     {
