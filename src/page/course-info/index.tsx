@@ -185,7 +185,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Авторы</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.author}
+                                            {(data as ICourseInfo).author}
                                         </p>
                                     </div>
                                 )
@@ -203,7 +203,7 @@ const CourseInfoPage = () => {
                                 <div>
                                     <Text fw={600} fz={"h3"}>Пререквизиты</Text>
                                     <p style={{whiteSpace: "pre-wrap"}}>
-                                        {data.prerequisites}
+                                        {(data as ICourseInfo).prerequisites}
                                     </p>
                                 </div>
                             )
@@ -221,7 +221,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Описание</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.description}
+                                            {(data as ICourseInfo).description}
                                         </p>
                                     </div>
                                 )
@@ -239,7 +239,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Изучаемые темы</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.topics}
+                                            {(data as ICourseInfo).topics}
                                         </p>
                                     </div>
                                 )
@@ -257,7 +257,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Оценивание</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.assessment}
+                                            {(data as ICourseInfo).assessment}
                                         </p>
                                     </div>
                                 )
@@ -311,7 +311,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Дополнительная информация</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.extra}
+                                            {(data as ICourseInfo).extra}
                                         </p>
                                     </div>
                                 )
