@@ -4,9 +4,9 @@ import {IAdminCourseRunTimetable, ICreatedTimetableRule, ICreateOrUpdateRule} fr
 
 const URL = {
     GET_TIMETABLE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable",
-    CREATE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/timetableId/rules",
-    DELETE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/timetableId/rules/ruleId",
-    UPDATE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/timetableId/rules/ruleId",
+    CREATE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/rules",
+    DELETE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/rules/ruleId",
+    UPDATE_TIMETABLE_RULE: "/api/v1/admin/courses/courseId/runs/courseRunId/timetable/rules/ruleId",
 };
 
 
@@ -20,8 +20,7 @@ const createTimetableRule = (courseId: string, courseRunId: string, timetableId:
     return axiosInstance.post<ICreatedTimetableRule>(
         URL.CREATE_TIMETABLE_RULE
             .replace("courseId", courseId)
-            .replace("courseRunId", courseRunId)
-            .replace("timetableId", timetableId),
+            .replace("courseRunId", courseRunId),
         data
     ).then(res => res.data);
 };
@@ -31,7 +30,6 @@ const updateTimetableRule = (courseId: string, courseRunId: string, timetableId:
         URL.UPDATE_TIMETABLE_RULE
             .replace("courseId", courseId)
             .replace("courseRunId", courseRunId)
-            .replace("timetableId", timetableId)
             .replace("ruleId", ruleId),
         data
     ).then(res => res.data);
@@ -42,7 +40,6 @@ const deleteTimetableRule = (courseId: string, courseRunId: string, timetableId:
         URL.DELETE_TIMETABLE_RULE
             .replace("courseId", courseId)
             .replace("courseRunId", courseRunId)
-            .replace("timetableId", timetableId)
             .replace("ruleId", ruleId)
     ).then(res => res.data);
 };
