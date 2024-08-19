@@ -57,10 +57,13 @@ const CourseRunTimetablePage = () => {
         />
     ))
 
-    const rows = isSuccess && data && (data as IAdminCourseRunTimetable).lessons.map(lesson => (
+    const rows = isSuccess && data && (data as IAdminCourseRunTimetable).lessons.map((lesson, index) => (
         <Table.Tr
             key={lesson.date + lesson.start_time}
         >
+            <Table.Td>
+                {index + 1}
+            </Table.Td>
             <Table.Td>
                 {getRussianMonthAndNumberByDateString(lesson.date)}
             </Table.Td>
@@ -123,9 +126,10 @@ const CourseRunTimetablePage = () => {
                     <Skeleton height={200} width={"100%"} radius="lg" />
                 ): (data as IAdminCourseRunTimetable).lessons.length > 0
                     ? (
-                        <Table highlightOnHover>
+                        <Table highlightOnHover maw={500}>
                             <Table.Thead>
                                 <Table.Tr>
+                                    <Table.Th><Text fw={700}>Номер</Text></Table.Th>
                                     <Table.Th><Text fw={700}>Дата</Text></Table.Th>
                                     <Table.Th><Text fw={700}>День недели</Text></Table.Th>
                                     <Table.Th><Text fw={700}>Время</Text></Table.Th>

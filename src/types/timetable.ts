@@ -5,7 +5,8 @@ interface ITimetableLesson{
 }
 
 interface ICourseTimetable{
-    lessons: Array<ITimetableLesson>
+    lessons: Array<ITimetableLesson>,
+    course_run_name: string
 }
 
 interface IWeekRule{

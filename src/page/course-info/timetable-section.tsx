@@ -28,10 +28,13 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
         </Stack>
     }
 
-    const rows = isSuccess && data && (data as ICourseTimetable).lessons.map((lesson) => (
+    const rows = isSuccess && data && (data as ICourseTimetable).lessons.map((lesson, index) => (
         <Table.Tr
             key={lesson.date + lesson.start_time}
         >
+            <Table.Td>
+                {index+1}
+            </Table.Td>
             <Table.Td>
                 {getRussianMonthAndNumberByDateString(lesson.date)}
             </Table.Td>
@@ -47,11 +50,12 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
     return (
         <Stack px={16} pt={16}>
             <Text fw={600} fz={"h3"}>
-                Запуск курса
+                Запуск курса ({isSuccess && data && (data as ICourseTimetable).course_run_name})
             </Text>
-            <Table highlightOnHover>
+            <Table highlightOnHover maw={500}>
                 <Table.Thead>
                     <Table.Tr>
+                        <Table.Th><Text fw={700}>Номер</Text></Table.Th>
                         <Table.Th><Text fw={700}>Дата</Text></Table.Th>
                         <Table.Th><Text fw={700}>День недели</Text></Table.Th>
                         <Table.Th><Text fw={700}>Время</Text></Table.Th>
