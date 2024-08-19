@@ -60,6 +60,7 @@ const CourseRunTimetablePage = () => {
     const rows = isSuccess && data && (data as IAdminCourseRunTimetable).lessons.map((lesson, index) => (
         <Table.Tr
             key={lesson.date + lesson.start_time}
+            bg={lesson.warning_messages.length > 0? 'var(--mantine-color-red-light)' : undefined}
         >
             <Table.Td>
                 {index + 1}
