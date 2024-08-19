@@ -60,4 +60,32 @@ function formatDate(dateString: string): string {
     return 'давно';
 }
 
-export {formatDate};
+function getMonthInGenitiveCase(monthIndex) {
+    const months = [
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+    ];
+    return months[monthIndex];
+}
+
+function getRussianMonthAndNumberByDateString(dateString: string): string{
+    const date = new Date(dateString);
+    const month = getMonthInGenitiveCase(date.getMonth());
+    const dayOfMonth = date.getDate();
+    return `${dayOfMonth} ${month}`;
+}
+
+function getRussianDayOfWeekByDateString(dateString: string): string{
+    const date = new Date(dateString);
+    return date.toLocaleString('ru-RU', { weekday: 'long' });
+}
+
+function formatTime(timeString: string): string{
+    return timeString.slice(0, 5);
+}
+
+function getISODate(value: Date): string{
+    return value.toISOString().split("T")[0]
+}
+
+export {formatDate, getRussianMonthAndNumberByDateString, getRussianDayOfWeekByDateString, formatTime, getISODate};
