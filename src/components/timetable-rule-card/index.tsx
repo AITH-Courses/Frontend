@@ -68,10 +68,10 @@ const TimetableRuleCard: React.FC<TimetableRuleCardProps> = (props) => {
                     ? (
                         <>
                             <Text>
-                                День: {getRussianMonthAndNumberByDateString((rule as IDayRule).date)}
+                                Время: {formatTime((rule as IDayRule).start_time)} - {formatTime((rule as IDayRule).end_time)}
                             </Text>
                             <Text>
-                                Время: {formatTime((rule as IDayRule).start_time)} - {formatTime((rule as IDayRule).end_time)}
+                                День: {getRussianMonthAndNumberByDateString((rule as IDayRule).date)}
                             </Text>
                         </>
                     ): (
