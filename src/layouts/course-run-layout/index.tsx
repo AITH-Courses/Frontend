@@ -1,10 +1,10 @@
 import React from "react";
 import { IconCalendarMonth, IconUsers, IconBook } from '@tabler/icons-react';
-import DefaultLayout from "../default-layout";
 import {Button, Drawer, Grid, NavLink, Stack} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import "./index.css"
+import AdminLayout from "../admin-layout";
 
 const profileTabs = [
     {
@@ -50,7 +50,7 @@ const AdminCourseRunLayout: React.FC<AdminCourseRunLayoutProps> = (props) => {
         />
     ))
     return (
-        <DefaultLayout>
+        <AdminLayout>
             <Drawer opened={opened} onClose={close}>
                 {links}
             </Drawer>
@@ -69,7 +69,7 @@ const AdminCourseRunLayout: React.FC<AdminCourseRunLayoutProps> = (props) => {
                     </Stack>
                 </Grid.Col>
             </Grid>
-        </DefaultLayout>
+        </AdminLayout>
     )
 }
 export default AdminCourseRunLayout;
