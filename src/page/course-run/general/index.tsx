@@ -1,8 +1,8 @@
 import AdminCourseRunLayout from "../../../layouts/course-run-layout";
-import {Anchor, Button, Divider, Group, Skeleton, Stack, Text, Title} from "@mantine/core";
+import {Button, Divider, Group, Skeleton, Stack, Text, Title} from "@mantine/core";
 import React from "react";
 import {useCourseRun, useDeleteCourseRun} from "../../../hooks/course-runs";
-import {NavLink, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AxiosError} from "axios";
 import {ICourseRun} from "../../../types/course-runs.ts";
 

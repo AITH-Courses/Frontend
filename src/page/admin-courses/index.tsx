@@ -1,4 +1,3 @@
-import {useMe} from "../../hooks/auth";
 import {Button, Skeleton, Stack, Text, Table, Group, Space, MantineColor, Anchor, Badge, Modal} from "@mantine/core";
 import React from "react";
 import AdminLayout from "../../layouts/admin-layout";
@@ -7,7 +6,7 @@ import {ICourseCard} from "../../types/courses.ts";
 import {useNavigate} from "react-router-dom";
 import {useDisclosure} from "@mantine/hooks";
 import {CreateCourseModal} from "./modals.tsx";
-import {AxiosError} from "axios/index";
+import {AxiosError} from "axios";
 
 const AdminCoursesPage = () => {
     const [opened, { open, close }] = useDisclosure(false);

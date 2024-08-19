@@ -10,7 +10,7 @@ interface TimetableSectionProps {
 
 const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
     const {courseId} = props;
-    const {data, isSuccess, isError, isFetching, error} = useCourseTimetable(courseId);
+    const {data, isSuccess, isError, isFetching} = useCourseTimetable(courseId);
 
     if (isFetching) {
         return <Stack px={16} pt={16}>
