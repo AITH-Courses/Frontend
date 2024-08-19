@@ -29,12 +29,11 @@ const useCreateTimetableRule = (courseId: string, courseRunId: string, timetable
         {
             mutationKey: ["courses", courseId, "course_run", courseRunId, "create_rule"],
             mutationFn: (data: ICreateOrUpdateRule) => createTimetableRule(courseId, courseRunId, timetableId, data),
-            onError: (error: AxiosError) => {
-                const data = error.response.data as IFailedOperation;
+            onError: () => {
                 notifications.show({
                     color: "red" as MantineColor,
                     title: "Ошибка!",
-                    message: data.message,
+                    message: "Требуется заполнить все поля в форме",
                     autoClose: 3000,
                 })
             },
