@@ -1,8 +1,8 @@
 import AdminCourseRunLayout from "../../../layouts/course-run-layout";
-import {Button, Divider, Group, Skeleton, Stack, Text, Title} from "@mantine/core";
+import {Anchor, Button, Divider, Group, Skeleton, Stack, Text, Title} from "@mantine/core";
 import React from "react";
 import {useCourseRun, useDeleteCourseRun} from "../../../hooks/course-runs";
-import {useNavigate, useParams} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {AxiosError} from "axios";
 import {ICourseRun} from "../../../types/course-runs.ts";
 
@@ -55,6 +55,9 @@ const CourseRunGeneralPage = () => {
                             <Skeleton height={30} width={"100%"} radius="lg" />
                         ): (
                             <Group>
+                                <Button variant="light" color="gray" radius="xl" onClick={() => navigate(`/admin/courses/${(params as pageParams).courseId}`)}>
+                                    Перейти к курсу
+                                </Button>
                                 <Button variant="light" color="red" radius="xl" loading={isPending} onClick={() => mutateAsync(undefined)}>
                                     Удалить
                                 </Button>
