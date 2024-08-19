@@ -5,6 +5,7 @@ import {ICourseInfo} from "../../types/courses.ts";
 import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button, List} from "@mantine/core";
 import React from "react";
 import FeedbackSection from "./feedback-section.tsx";
+import TimetableSection from "./timetable-section.tsx";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
@@ -169,6 +170,9 @@ const CourseInfoPage = () => {
                 <Tabs.Tab value="feedback">
                     <Text size="xl">Отзывы</Text>
                 </Tabs.Tab>
+                <Tabs.Tab value="timetable">
+                    <Text size="xl">Расписание</Text>
+                </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="info">
@@ -322,6 +326,9 @@ const CourseInfoPage = () => {
 
             <Tabs.Panel value="feedback">
                 <FeedbackSection courseId={courseId.toString()}/>
+            </Tabs.Panel>
+            <Tabs.Panel value="timetable">
+                <TimetableSection courseId={courseId.toString()}/>
             </Tabs.Panel>
         </Tabs>
     </DefaultLayout>
