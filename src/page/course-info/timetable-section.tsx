@@ -3,6 +3,7 @@ import React from "react";
 import {useCourseTimetable} from "../../hooks/timetable";
 import {ICourseTimetable} from "../../types/timetable.ts";
 import {formatTime, getRussianDayOfWeekByDateString, getRussianMonthAndNumberByDateString} from "../../utils/date.ts";
+import {AxiosError} from "axios";
 
 interface TimetableSectionProps {
     courseId: string
@@ -10,7 +11,7 @@ interface TimetableSectionProps {
 
 const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
     const {courseId} = props;
-    const {data, isSuccess, isError, isFetching} = useCourseTimetable(courseId);
+    const {data, isSuccess, isError, error, isFetching} = useCourseTimetable(courseId);
 
     if (isFetching) {
         return <Stack px={16} pt={16}>
@@ -22,7 +23,7 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
     if (isError) {
         return <Stack px={16} pt={16}>
             <Text c="dimmed" size="lg" ta="left" >
-                Произошла ошибка при загрузке расписания
+                {(error as AxiosError).response.data.message}
             </Text>
         </Stack>
     }
