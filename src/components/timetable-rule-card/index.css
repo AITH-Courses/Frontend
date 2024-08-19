@@ -1,0 +1,7 @@
+.rule{
+    background: var(--light-white);
+    padding: 16px 16px;
+    border-radius: 16px;
+    position: relative;
+    min-height: 100%;
+}
