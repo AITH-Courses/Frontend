@@ -15,6 +15,7 @@ import {Page403} from "../page/403";
 import CourseRunGeneralPage from "../page/course-run/general";
 import CourseRunTimetablePage from "../page/course-run/timetable";
 import CourseRunMembersPage from "../page/course-run/members";
+import AdminLoginPage from "../page/admin-login";
 
 const router = createBrowserRouter([
     {
@@ -63,6 +64,12 @@ const router = createBrowserRouter([
         path: "/courses/:courseId",
         element: (
             <CourseInfoPage/>
+        ),
+    },
+    {
+        path: "/admin/login",
+        element: (
+            <AdminLoginPage/>
         ),
     },
     {
