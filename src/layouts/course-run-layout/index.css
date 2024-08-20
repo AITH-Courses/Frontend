@@ -1,0 +1,8 @@
+.course-run__sidebar{
+    max-width: 256px;
+    min-width: 256px;
+    background: var(--light-white);
+    padding: 16px 8px;
+    border-radius: 16px;
+    height: 100%;
+}

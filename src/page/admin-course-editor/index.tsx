@@ -15,7 +15,6 @@ import {
     Group, NumberInput, Checkbox, Divider, Textarea, ImageProps, FileButton
 } from "@mantine/core";
 import React, {useState, useEffect, useRef} from "react";
-import {useMe} from "../../hooks/auth";
 import {FORMATS, IMPLEMENTERS, ROLES, LAST_RUNS, PERIODS} from "../../constants";
 import {
     useDeleteCourse,
@@ -27,12 +26,13 @@ import {
 } from "../../hooks/admin/courses.ts";
 import AdminLayout from "../../layouts/admin-layout";
 import CourseResourcesEditor from "../../components/course-resources-editor";
+import CourseRunsSection from "./course-runs-section.tsx";
+import {AxiosError} from "axios";
 
 const AdminCourseEditorPage = () => {
     const {courseId} = useParams();
     const navigate = useNavigate();
-    const {isError: isNoUserError} = useMe();
-    const {data, isFetching, isSuccess, isError} = useCourseById(courseId.toString())
+    const {data, isFetching, isSuccess, isError, error} = useCourseById(courseId.toString())
     const {mutateAsync: mutateUpdate, isPending: isUpdatePending} = useUpdateCourse(courseId.toString())
     const {mutateAsync: mutateDelete, isPending: isDeletePending} = useDeleteCourse(courseId.toString())
     const {mutateAsync: mutatePublish, isPending: isPublishPending} = usePublishCourse(courseId.toString())
@@ -77,27 +77,15 @@ const AdminCourseEditorPage = () => {
         }
     }
 
-    if (isNoUserError){
-        return (
-            <AdminLayout>
-                <Stack align="flex-start">
-                    <Text c="black" size="lg" ta="left" >
-                        Доступ к админ-панели доступен только организаторам
-                    </Text>
-                    <Button variant="filled" size="sm" color="dark" onClick={() => navigate("/login")}>
-                        Войти в аккаунт
-                    </Button>
-                </Stack>
-            </AdminLayout>
-        )
-
-    }
     if (isError){
+        if ([403, 401].includes((error as AxiosError).response.status)){
+            navigate("/403");
+        }
         return (
             <AdminLayout>
                 <Stack align="flex-start">
                     <Text c="black" size="lg" ta="left" >
-                        Такого курса не существует
+                        Произошла ошибка при загрузке страницы курса
                     </Text>
                     <Button variant="filled" size="sm" color="dark" onClick={() => navigate("/admin/courses")}>
                         Перейти к доступным курсам
@@ -105,7 +93,6 @@ const AdminCourseEditorPage = () => {
                 </Stack>
             </AdminLayout>
         )
-
     }
 
     return <AdminLayout>
@@ -342,8 +329,8 @@ const AdminCourseEditorPage = () => {
                 <Tabs.Tab value="info">
                     <Text size="xl">О курсе</Text>
                 </Tabs.Tab>
-                <Tabs.Tab value="analytics">
-                    <Text size="xl">Аналитика</Text>
+                <Tabs.Tab value="runs">
+                    <Text size="xl">Запуски</Text>
                 </Tabs.Tab>
             </Tabs.List>
 
@@ -539,12 +526,8 @@ const AdminCourseEditorPage = () => {
                     }
                 </Stack>
             </Tabs.Panel>
-            <Tabs.Panel value="analytics">
-                <Stack px={16} pt={16}>
-                    <Text fw={600} fz={"h3"}>
-                        Аналитика
-                    </Text>
-                </Stack>
+            <Tabs.Panel value="runs">
+                <CourseRunsSection courseId={courseId.toString()}/>
             </Tabs.Panel>
         </Tabs>
     </AdminLayout>

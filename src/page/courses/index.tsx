@@ -18,7 +18,6 @@ export default function CoursesPage(){
         terms: search.getAll("term"),
         formats: search.getAll("format"),
     }
-    console.log(JSON.stringify(initialFilters))
     const page = search.get("page") != null? +search.get("page"): 1
     const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page});
 

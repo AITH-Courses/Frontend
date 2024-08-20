@@ -19,8 +19,8 @@ const Footer = () => {
                     </h3>
                     {
                         ROLES.map(role => (
-                            <p>
-                                <NavLink key={role} className={"footer__link"} to={`/courses?role=${role}`} end>
+                            <p key={role}>
+                                <NavLink className={"footer__link"} to={`/courses?role=${role}`} end>
                                     {role}
                                 </NavLink>
                             </p>

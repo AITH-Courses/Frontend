@@ -1,7 +1,7 @@
 import "./index.css";
 import React from "react";
 import Header from "../../components/header";
-import {Space} from "@mantine/core";
+import Footer from "../../components/footer";
 
 
 const MAIN_LINKS = [
@@ -25,16 +25,16 @@ export interface LayoutProps  {
     children: React.ReactNode
 }
 
-export default function DefaultLayout(props: LayoutProps){
+export default function HomeLayout(props: LayoutProps){
     return (
-        <div className="default-layout">
-            <div className="default-layout__header">
+        <div className="home-layout">
+            <div className="home-layout__header">
                 <Header mainLinks={MAIN_LINKS} userLinks={USER_LINKS}/>
             </div>
             <main>
                 {props.children}
             </main>
-            <Space h={24}/>
+            <Footer/>
         </div>
     )
 }

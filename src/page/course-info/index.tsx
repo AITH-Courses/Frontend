@@ -5,6 +5,7 @@ import {ICourseInfo} from "../../types/courses.ts";
 import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button, List} from "@mantine/core";
 import React from "react";
 import FeedbackSection from "./feedback-section.tsx";
+import TimetableSection from "./timetable-section.tsx";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
@@ -169,6 +170,9 @@ const CourseInfoPage = () => {
                 <Tabs.Tab value="feedback">
                     <Text size="xl">Отзывы</Text>
                 </Tabs.Tab>
+                <Tabs.Tab value="timetable">
+                    <Text size="xl">Расписание</Text>
+                </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="info">
@@ -185,7 +189,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Авторы</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.author}
+                                            {(data as ICourseInfo).author}
                                         </p>
                                     </div>
                                 )
@@ -203,7 +207,7 @@ const CourseInfoPage = () => {
                                 <div>
                                     <Text fw={600} fz={"h3"}>Пререквизиты</Text>
                                     <p style={{whiteSpace: "pre-wrap"}}>
-                                        {data.prerequisites}
+                                        {(data as ICourseInfo).prerequisites}
                                     </p>
                                 </div>
                             )
@@ -221,7 +225,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Описание</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.description}
+                                            {(data as ICourseInfo).description}
                                         </p>
                                     </div>
                                 )
@@ -239,7 +243,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Изучаемые темы</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.topics}
+                                            {(data as ICourseInfo).topics}
                                         </p>
                                     </div>
                                 )
@@ -257,7 +261,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Оценивание</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.assessment}
+                                            {(data as ICourseInfo).assessment}
                                         </p>
                                     </div>
                                 )
@@ -311,7 +315,7 @@ const CourseInfoPage = () => {
                                     <div>
                                         <Text fw={600} fz={"h3"}>Дополнительная информация</Text>
                                         <p style={{whiteSpace: "pre-wrap"}}>
-                                            {data.extra}
+                                            {(data as ICourseInfo).extra}
                                         </p>
                                     </div>
                                 )
@@ -322,6 +326,9 @@ const CourseInfoPage = () => {
 
             <Tabs.Panel value="feedback">
                 <FeedbackSection courseId={courseId.toString()}/>
+            </Tabs.Panel>
+            <Tabs.Panel value="timetable">
+                <TimetableSection courseId={courseId.toString()} courseName={data && (data as ICourseInfo).name}/>
             </Tabs.Panel>
         </Tabs>
     </DefaultLayout>

@@ -35,7 +35,7 @@ const FeaturesSection = () => {
                 {
                     features.map(feature => (
                         <Grid.Col key={feature.title} span={{sm: 12, md: 4}}>
-                            <Card shadow="md" radius="md"  padding="xl" style={{cursor: "pointer", height: "100%"}}>
+                            <Card shadow="md" radius="md"  padding="xl" style={{height: "100%"}}>
                                 <Flex align={"center"} justify={"center"}>
                                     <feature.icon
                                         style={{ width: rem(50), height: rem(50) }}

@@ -3,12 +3,19 @@ import {createBrowserRouter} from "react-router-dom";
 import LoginPage from "../page/login";
 import RegisterPage from "../page/register";
 import {Page404} from "../page/404";
-import UserProfilePage from "../page/user-profile";
 import CoursesPage from "../page/courses";
 import CourseInfoPage from "../page/course-info";
 import AdminCourseEditorPage from "../page/admin-course-editor";
 import AdminCoursesPage from "../page/admin-courses";
 import HomePage from "../page/home";
+import ProfilePage from "../page/talent-account/profile";
+import FavoriteCoursesPage from "../page/talent-account/favorites";
+import TalentNotificationsPage from "../page/talent-account/notifications";
+import {Page403} from "../page/403";
+import CourseRunGeneralPage from "../page/course-run/general";
+import CourseRunTimetablePage from "../page/course-run/timetable";
+import CourseRunMembersPage from "../page/course-run/members";
+import AdminLoginPage from "../page/admin-login";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +39,19 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: (
-            <UserProfilePage/>
+            <ProfilePage/>
+        ),
+    },
+    {
+        path: "/profile/favorites",
+        element: (
+            <FavoriteCoursesPage/>
+        ),
+    },
+    {
+        path: "/profile/notifications",
+        element: (
+            <TalentNotificationsPage/>
         ),
     },
     {
@@ -48,9 +67,33 @@ const router = createBrowserRouter([
         ),
     },
     {
+        path: "/admin/login",
+        element: (
+            <AdminLoginPage/>
+        ),
+    },
+    {
         path: "/admin/courses/:courseId",
         element: (
             <AdminCourseEditorPage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId",
+        element: (
+            <CourseRunGeneralPage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId/timetable",
+        element: (
+            <CourseRunTimetablePage/>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId/members",
+        element: (
+            <CourseRunMembersPage/>
         ),
     },
     {
@@ -59,7 +102,12 @@ const router = createBrowserRouter([
             <AdminCoursesPage/>
         ),
     },
-
+    {
+        path: "/403",
+        element: (
+            <Page403/>
+        )
+    },
     {
         path: "*",
         element: (

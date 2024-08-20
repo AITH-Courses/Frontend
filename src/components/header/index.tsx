@@ -7,6 +7,7 @@ import {useLogout, useMe} from "../../hooks/auth";
 import {AUTH_TOKEN_KEY} from "../../api/constants.ts";
 import "./index.css";
 import React from "react";
+import {IUser} from "../../types/auth.ts";
 
 interface Link{
     name: string
@@ -55,8 +56,8 @@ const Header: React.FC<HeaderProps> = (props) => {
                                 <Menu trigger="click-hover" transitionProps={{ exitDuration: 0 }} withinPortal>
                                     <Menu.Target>
                                         <div style={{display: "flex", columnGap: "4px", alignItems: "center", cursor: "pointer", fontWeight: "bold"}}>
-                                            <span>{user.firstname}</span>
-                                            <span>{user.lastname}</span>
+                                            <span>{(user as IUser).firstname}</span>
+                                            <span>{(user as IUser).lastname}</span>
                                             <IconChevronDown size="20" stroke={1.5} />
                                         </div>
                                     </Menu.Target>
