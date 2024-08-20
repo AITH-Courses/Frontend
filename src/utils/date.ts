@@ -84,8 +84,15 @@ function formatTime(timeString: string): string{
     return timeString.slice(0, 5);
 }
 
+function addZero(value: number): string {
+    if (value < 10){
+        return "0"
+    }
+    return ""
+}
+
 function getISODate(value: Date): string{
-    return value.toISOString().split("T")[0]
+    return `${value.getFullYear()}-${addZero(value.getMonth() + 1)}${value.getMonth() + 1}-${addZero(value.getDate())}${value.getDate()}`
 }
 
 export {formatDate, getRussianMonthAndNumberByDateString, getRussianDayOfWeekByDateString, formatTime, getISODate};

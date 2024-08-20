@@ -328,7 +328,7 @@ const CourseInfoPage = () => {
                 <FeedbackSection courseId={courseId.toString()}/>
             </Tabs.Panel>
             <Tabs.Panel value="timetable">
-                <TimetableSection courseId={courseId.toString()}/>
+                <TimetableSection courseId={courseId.toString()} courseName={data && (data as ICourseInfo).name}/>
             </Tabs.Panel>
         </Tabs>
     </DefaultLayout>
