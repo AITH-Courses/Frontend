@@ -56,7 +56,7 @@ export default function CoursesPage(){
                         <Grid gutter="sm">
                             {
                                 !isFetching && isSuccess && (data as ICoursesWithPage).courses.map(card => (
-                                    <Grid.Col span={{ xs: 12, md: 6, lg: 4 }} key={card.id}>
+                                    <Grid.Col span={{ xs: 12, md: 6, lg: 4 }} key={card.id} p={16}>
                                         <CourseCard card={card}/>
                                     </Grid.Col>
                                 ))
@@ -78,7 +78,7 @@ export default function CoursesPage(){
                             }
                             {
                                 isFetching &&  [1, 2, 3, 4, 5, 6, 7, 8, 9].map(value => (
-                                    <Grid.Col key={value} span={{ xs: 12, md: 6, lg: 4 }}>
+                                    <Grid.Col key={value} span={{ xs: 12, md: 6, lg: 4 }} p={16}>
                                         <EmptyCourseCard/>
                                     </Grid.Col>
                                 ))
