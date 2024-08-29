@@ -52,12 +52,12 @@ const TalentProfileLayout: React.FC<TalentProfileLayoutProps> = (props) => {
                 {links}
             </Drawer>
             <Grid gutter="xl">
-                <Grid.Col ps={0} py={0} span="content" visibleFrom="sm">
+                <Grid.Col px={12} span="content" visibleFrom="sm">
                     <aside className="sidebar">
                         {links}
                     </aside>
                 </Grid.Col>
-                <Grid.Col pe={0} py={0} span="auto">
+                <Grid.Col px={12} span="auto">
                     <Stack>
                         <Button variant="outline" color="rgba(0, 0, 0, 1)" hiddenFrom={"sm"} onClick={open}>
                             Открыть меню
