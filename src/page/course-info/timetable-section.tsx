@@ -47,9 +47,6 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
             key={lesson.date + lesson.start_time}
         >
             <Table.Td>
-                {index+1}
-            </Table.Td>
-            <Table.Td>
                 {getRussianMonthAndNumberByDateString(lesson.date)}
             </Table.Td>
             <Table.Td>
@@ -74,7 +71,6 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
             <Table highlightOnHover maw={500}>
                 <Table.Thead>
                     <Table.Tr>
-                        <Table.Th><Text fw={700}>Номер</Text></Table.Th>
                         <Table.Th><Text fw={700}>Дата</Text></Table.Th>
                         <Table.Th><Text fw={700}>День недели</Text></Table.Th>
                         <Table.Th><Text fw={700}>Время</Text></Table.Th>
