@@ -6,6 +6,8 @@ import {AxiosError} from "axios";
 import {IFailedOperation, ISuccessOperation} from "../../types/base.ts";
 import {createProfile, getProfile, updateProfileGeneral, updateProfileLinks} from "../../api/talent-profile";
 import {IUpdateProfileGeneral, IUpdateProfileLinks} from "../../types/talent-profile.ts";
+import {createCourseLogo} from "../../api/admin/course-logo.ts";
+import {createTalentAvatar} from "../../api/talent-profile/talent-avatar.ts";
 
 
 const useProfile = () => {
@@ -105,4 +107,33 @@ const useUpdateProfileLinks = () => {
     )
 };
 
-export {useUpdateProfileGeneral, useCreateProfile, useProfile, useUpdateProfileLinks}
+const useCreateTalentAvatar = () => {
+    return useMutation(
+        {
+            mutationKey: ["create_talent_avatar"],
+            mutationFn: (file: File) => createTalentAvatar(file),
+            onError: (error: AxiosError) => {
+                const data = error.response.data as IFailedOperation;
+                notifications.show({
+                    color: "red" as MantineColor,
+                    title: "Ошибка!",
+                    message: data.message || "Внутренняя ошибка сервера",
+                    position: "top-right",
+                    autoClose: 3000,
+                })
+
+            },
+            onSuccess: () => {
+                notifications.show({
+                    color: "green" as MantineColor,
+                    title: "Успешно!",
+                    message: "Аватар загружен. Не забудьте сохранить изменения.",
+                    position: "top-right",
+                    autoClose: 1500,
+                })
+            },
+        }
+    )
+};
+
+export {useUpdateProfileGeneral, useCreateProfile, useProfile, useUpdateProfileLinks, useCreateTalentAvatar}

@@ -44,4 +44,8 @@ interface ICreateFavorite {
     course_id: string,
 }
 
-export {ITalentProfile, IUpdateProfileGeneral, IUpdateProfileLinks, IProfileFavoriteCourse, ICreateFavorite, IFavoriteStatus}
+interface ICreatedTalentAvatar{
+    URL: string
+}
+
+export {ITalentProfile, IUpdateProfileGeneral, IUpdateProfileLinks, IProfileFavoriteCourse, ICreateFavorite, IFavoriteStatus, ICreatedTalentAvatar}
