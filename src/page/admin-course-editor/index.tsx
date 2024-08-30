@@ -108,7 +108,7 @@ const AdminCourseEditorPage = () => {
                             radius="lg"
                             src={(data as ICourseInfo).image_url}
                             alt="Изменить логотип курса"
-                            fallbackSrc="https://placehold.co/1280x720?text=Нет+логотипа"
+                            fallbackSrc="https://placehold.co/1280x720?text=Нет+лого"
                         />
                     )
                 }
