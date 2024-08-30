@@ -1,9 +1,8 @@
-import {ActionIcon, Avatar, Button, Divider, Group, Stack, TextInput, FileButton} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Divider, Group, Stack, TextInput, ImageProps} from "@mantine/core";
 import {IconCheck, IconX} from "@tabler/icons-react";
 import React, {useEffect, useRef, useState} from "react";
 import {ICreatedTalentAvatar, ITalentProfile} from "../../../types/talent-profile.ts";
 import {useCreateTalentAvatar} from "../../../hooks/talent-profile/profile.ts";
-import {ImageProps} from "@mantine/core/lib";
 
 interface GeneralEditBlockProps {
     profile: ITalentProfile,

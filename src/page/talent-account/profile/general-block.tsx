@@ -7,14 +7,14 @@ interface GeneralBlockProps {
     profile: ITalentProfile | null,
     isLoading: boolean,
     isSuccess: boolean,
-    startEditMode: () => void
+    startEditing: () => void
 }
 
 const GeneralBlock: React.FC<GeneralBlockProps> = (props) => {
-    const {profile, isLoading, isSuccess, startEditMode} = props;
+    const {profile, isLoading, isSuccess, startEditing} = props;
     return (
         <div className="block">
-            <ActionIcon variant="transparent" size="xl" aria-label="Edit" pos="absolute" top="24px" right="24px" onClick={startEditMode} title="Редактировать профиль">
+            <ActionIcon variant="transparent" size="xl" aria-label="Edit" pos="absolute" top="24px" right="24px" onClick={startEditing} title="Редактировать профиль">
                 <IconPencil color="black" size="2rem"  stroke={1} />
             </ActionIcon>
             <Group>
