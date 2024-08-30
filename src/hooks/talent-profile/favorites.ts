@@ -21,12 +21,12 @@ const useFavoriteCourses = () => {
     )
 };
 
-const useAddNewFavorite = () => {
+const useAddNewFavorite = (courseId: string) => {
     const queryClient = useQueryClient();
     return useMutation(
         {
             mutationKey: ["create_favorite"],
-            mutationFn: (data: ICreateFavorite) => addNewFavorite(data),
+            mutationFn: () => addNewFavorite({course_id: courseId}),
             onError: (error: AxiosError) => {
                 const data = error.response.data as IFailedOperation;
                 notifications.show({
@@ -38,6 +38,7 @@ const useAddNewFavorite = () => {
             },
             onSuccess: (data: ISuccessOperation) => {
                 queryClient.invalidateQueries({ queryKey: ["favorites"] });
+                queryClient.invalidateQueries({ queryKey: ["course", courseId, "favorite_status"] });
                 notifications.show({
                     color: "green" as MantineColor,
                     title: "Успешно!",
