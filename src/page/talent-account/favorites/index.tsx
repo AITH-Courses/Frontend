@@ -24,7 +24,7 @@ const FavoriteCoursesPage = () => {
             <div>
                 <Title order={2} ta="left">Избранные курсы</Title>
                 <Divider my={"md"}/>
-                <Stack gap="xs">
+                <Stack gap="lg">
                     {
                         isLoading
                             ? [1, 2, 3].map(element => (
@@ -53,46 +53,70 @@ const FavoriteCoursesPage = () => {
                             ): isSuccess && (favoriteCourses as Array<IProfileFavoriteCourse>).map(favoriteCourse =>
                             (
                                 <Flex
-                                    gap="lg"
+                                    gap="xs"
                                     justify="flex-start"
-                                    align="stretch"
-                                    direction="row"
-                                    wrap="wrap"
+                                    direction="column"
                                 >
-                                    <Image
-                                        radius="lg"
-                                        src={favoriteCourse.image_url}
-                                        alt="Course logo"
-                                        h={"120px"}
-                                        w={"120px"}
-                                        fallbackSrc="https://placehold.co/512x512?text=Нет+лого"
-                                    />
-                                    <Stack gap="xs" align="flex-start">
-                                        <Text c="black" fw={600} size="lg" ta="left" >
-                                            {favoriteCourse.name}
-                                        </Text>
-                                        <Text c="dimmed" size="md" ta="left" >
-                                            {favoriteCourse.implementer}
-                                        </Text>
-                                        <Group>
-                                            <Button
-                                                variant="outline"
-                                                size="xs"
-                                                color="grey"
-                                                onClick={() => navigate(`/courses/${favoriteCourse.course_id}`)}
-                                            >
-                                                Перейти
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                size="xs"
-                                                color="red"
-                                                onClick={() => deleteFavoriteCourse(favoriteCourse.id)}
-                                            >
-                                                Убрать
-                                            </Button>
-                                        </Group>
-                                    </Stack>
+                                    <Flex
+                                        gap="lg"
+                                        justify="flex-start"
+                                        align="stretch"
+                                        direction="row"
+                                        wrap="nowrap"
+                                    >
+                                        <Image
+                                            radius="lg"
+                                            src={favoriteCourse.image_url}
+                                            alt="Course logo"
+                                            h={"120px"}
+                                            w={"120px"}
+                                            fallbackSrc="https://placehold.co/512x512?text=Нет+лого"
+                                        />
+                                        <Stack gap="xs" align="flex-start">
+                                            <Text c="black" fw={600} size="lg" ta="left" lineClamp={3}>
+                                                {favoriteCourse.name}
+                                            </Text>
+                                            <Text c="dimmed" size="md" ta="left" >
+                                                {favoriteCourse.implementer}
+                                            </Text>
+                                            <Group visibleFrom={"xs"}>
+                                                <Button
+                                                    variant="outline"
+                                                    size="xs"
+                                                    color="grey"
+                                                    onClick={() => navigate(`/courses/${favoriteCourse.course_id}`)}
+                                                >
+                                                    Перейти
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="xs"
+                                                    color="red"
+                                                    onClick={() => deleteFavoriteCourse(favoriteCourse.id)}
+                                                >
+                                                    Убрать
+                                                </Button>
+                                            </Group>
+                                        </Stack>
+                                    </Flex>
+                                    <Group grow hiddenFrom={"xs"}>
+                                        <Button
+                                            variant="outline"
+                                            size="xs"
+                                            color="grey"
+                                            onClick={() => navigate(`/courses/${favoriteCourse.course_id}`)}
+                                        >
+                                            Перейти
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="xs"
+                                            color="red"
+                                            onClick={() => deleteFavoriteCourse(favoriteCourse.id)}
+                                        >
+                                            Убрать
+                                        </Button>
+                                    </Group>
                                 </Flex>
                             )
                         )
