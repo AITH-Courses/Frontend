@@ -43,7 +43,7 @@ export default function CoursesPage(){
     return (
         <>
             <DefaultLayout>
-                <Grid gutter="xs" align="stretch">
+                <Grid gutter="lg" align="stretch">
                     <Grid.Col span={{ xs: 12, sm: 4, md: 3, lg: 2 }}>
                         <CoursesFilter
                             key={JSON.stringify(initialFilters)}
