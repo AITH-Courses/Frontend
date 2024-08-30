@@ -14,17 +14,17 @@ const profileTabs = [
         icon: IconUser,
     },
     {
+        label: "Избранные курсы",
+        value: "favorites",
+        link: "/profile/favorites",
+        icon: IconBooks
+    },
+    {
         label: "Уведомления",
         value: "notification",
         link: "/profile/notifications",
         icon: IconBellRinging
     },
-    {
-        label: "Избранные курсы",
-        value: "favorites",
-        link: "/profile/favorites",
-        icon: IconBooks
-    }
 ]
 
 export interface TalentProfileLayoutProps  {
@@ -51,7 +51,7 @@ const TalentProfileLayout: React.FC<TalentProfileLayoutProps> = (props) => {
             <Drawer opened={opened} onClose={close}>
                 {links}
             </Drawer>
-            <Grid gutter="xl">
+            <Grid gutter="xl" h="100%" className={"app-grid-parent"}>
                 <Grid.Col px={12} span="content" visibleFrom="sm">
                     <aside className="sidebar">
                         {links}

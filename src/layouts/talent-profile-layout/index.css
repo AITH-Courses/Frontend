@@ -6,3 +6,7 @@
     border-radius: 16px;
     height: 100%;
 }
+
+.app-grid-parent > .mantine-Grid-inner{
+    height: 100%;
+}
