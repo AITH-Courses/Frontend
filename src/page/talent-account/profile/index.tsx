@@ -1,20 +1,27 @@
 import TalentProfileLayout from "../../../layouts/talent-profile-layout";
-import {Grid} from "@mantine/core";
+import {Button, Grid, Stack, Text} from "@mantine/core";
 import "./index.css";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useProfile, useUpdateProfileGeneral, useUpdateProfileLinks} from "../../../hooks/talent-profile/profile.ts";
+import {
+    useCreateProfile,
+    useProfile,
+    useUpdateProfileGeneral,
+    useUpdateProfileLinks
+} from "../../../hooks/talent-profile/profile.ts";
 import {ITalentProfile} from "../../../types/talent-profile.ts";
 import GeneralBlock from "./general-block.tsx";
 import GeneralEditBlock from "./general-edit-block.tsx";
 import LinksBlock from "./links-block.tsx";
 import LinksEditBlock from "./links-edit-block.tsx";
+import {AxiosError} from "axios";
 
 const ProfilePage = () => {
     const navigate = useNavigate()
-    const {data, isSuccess, isError, isLoading} = useProfile();
+    const {data, isSuccess, isError, isLoading, error} = useProfile();
     const {mutateAsync: updateProfileGeneral} = useUpdateProfileGeneral()
     const {mutateAsync: updateProfileLinks} = useUpdateProfileLinks()
+    const {mutateAsync: createProfile, isPending: isCreateProfilePending} = useCreateProfile()
     const [profile, setProfile] = useState<ITalentProfile | null>(null)
     const [isEditGeneral, setIsEditGeneral] = useState(false);
     const [isEditLinks, setIsEditLinks] = useState(false);
@@ -24,6 +31,27 @@ const ProfilePage = () => {
     }, [data]);
 
     if (isError){
+        if ((error as AxiosError).response.status === 401){
+            navigate("/login");
+        } else if ((error as AxiosError).response.status === 403){
+            navigate("/403");
+        } else {
+            return (
+                <TalentProfileLayout>
+                    <Stack align="flex-start">
+                        <Text c="dimmed" size="lg" ta={"center"}>
+                            Похоже профиль еще не создан. Давай исправим это!?
+                        </Text>
+                        <Button variant={"outline"} color="black" loading={isCreateProfilePending} onClick={() => createProfile(undefined)}>
+                            Создать профиль
+                        </Button>
+                    </Stack>
+                </TalentProfileLayout>
+            )
+        }
+        if ([403, 401].includes((error as AxiosError).response.status)){
+            navigate("/403");
+        }
         navigate("/login")
     }
 
