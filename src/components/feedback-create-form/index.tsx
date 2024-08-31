@@ -1,5 +1,5 @@
 import {useForm} from "@mantine/form";
-import {Button, Flex, MantineColor, Space, Textarea, Rating, Text} from "@mantine/core";
+import {Button, Flex, MantineColor, Space, Textarea, Rating, Text, Grid} from "@mantine/core";
 import React, {useEffect} from "react";
 import {useCreateFeedback} from "../../hooks/feedback";
 
@@ -43,6 +43,7 @@ const FeedbackCreateForm: React.FC<FeedbackCreateFormProps> = (props) => {
         )
     }
 
+
     return (
         <form onSubmit={form.onSubmit((values) => createFeedback(values.text, values.rating))}>
             <Rating
@@ -65,7 +66,7 @@ const FeedbackCreateForm: React.FC<FeedbackCreateFormProps> = (props) => {
             <Textarea
                 key={form.key('text')}
                 withAsterisk
-                placeholder="Начните печатать свой отзыв здесь..."
+                placeholder="Расскажи о том, что понравилось и не понравилось, что стоило бы добавить или убрать..."
                 autosize
                 minRows={3}
                 {...form.getInputProps('text')}
@@ -78,8 +79,8 @@ const FeedbackCreateForm: React.FC<FeedbackCreateFormProps> = (props) => {
                 direction="row"
             >
                 <Button type="submit" size="xs" color={"black" as MantineColor}>Отправить</Button>
+                <Button size="xs" variant="outline" onClick={form.reset} color={"black" as MantineColor}>Очистить</Button>
             </Flex>
-
         </form>
     )
 }
