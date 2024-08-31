@@ -1,5 +1,5 @@
 import React from "react";
-import { IconUser, IconBellRinging, IconBooks } from '@tabler/icons-react';
+import {IconBellRinging, IconBooks, IconUserSquareRounded} from '@tabler/icons-react';
 import DefaultLayout from "../default-layout";
 import {Button, Drawer, Grid, NavLink, Stack} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
@@ -11,7 +11,7 @@ const profileTabs = [
         label: "Профиль",
         value: "profile",
         link: "/profile",
-        icon: IconUser,
+        icon: IconUserSquareRounded,
     },
     {
         label: "Избранные курсы",
