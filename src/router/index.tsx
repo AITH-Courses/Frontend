@@ -16,12 +16,13 @@ import CourseRunGeneralPage from "../page/course-run/general";
 import CourseRunTimetablePage from "../page/course-run/timetable";
 import CourseRunMembersPage from "../page/course-run/members";
 import AdminLoginPage from "../page/admin-login";
+import AutoScrollArea from "../other/auto-scroll";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: (
-            <HomePage/>
+            <AutoScrollArea><HomePage/></AutoScrollArea>
         ),
     },
     {
@@ -39,67 +40,67 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: (
-            <ProfilePage/>
+            <AutoScrollArea><ProfilePage/></AutoScrollArea>
         ),
     },
     {
         path: "/profile/favorites",
         element: (
-            <FavoriteCoursesPage/>
+            <AutoScrollArea><FavoriteCoursesPage/></AutoScrollArea>
         ),
     },
     {
         path: "/profile/notifications",
         element: (
-            <TalentNotificationsPage/>
+            <AutoScrollArea><TalentNotificationsPage/></AutoScrollArea>
         ),
     },
     {
         path: "/courses",
         element: (
-            <CoursesPage/>
+            <AutoScrollArea><CoursesPage/></AutoScrollArea>
         ),
     },
     {
         path: "/courses/:courseId",
         element: (
-            <CourseInfoPage/>
+            <AutoScrollArea><CourseInfoPage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/login",
         element: (
-            <AdminLoginPage/>
+            <AutoScrollArea><AdminLoginPage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/courses/:courseId",
         element: (
-            <AdminCourseEditorPage/>
+            <AutoScrollArea><AdminCourseEditorPage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/courses/:courseId/runs/:courseRunId",
         element: (
-            <CourseRunGeneralPage/>
+            <AutoScrollArea><CourseRunGeneralPage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/courses/:courseId/runs/:courseRunId/timetable",
         element: (
-            <CourseRunTimetablePage/>
+            <AutoScrollArea><CourseRunTimetablePage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/courses/:courseId/runs/:courseRunId/members",
         element: (
-            <CourseRunMembersPage/>
+            <AutoScrollArea><CourseRunMembersPage/></AutoScrollArea>
         ),
     },
     {
         path: "/admin/courses",
         element: (
-            <AdminCoursesPage/>
+            <AutoScrollArea><AdminCoursesPage/></AutoScrollArea>
         ),
     },
     {

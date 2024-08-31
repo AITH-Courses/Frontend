@@ -1,5 +1,5 @@
 import React from "react";
-import { IconUser, IconBellRinging, IconBooks } from '@tabler/icons-react';
+import {IconBellRinging, IconBooks, IconUserSquareRounded} from '@tabler/icons-react';
 import DefaultLayout from "../default-layout";
 import {Button, Drawer, Grid, NavLink, Stack} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
@@ -11,7 +11,13 @@ const profileTabs = [
         label: "Профиль",
         value: "profile",
         link: "/profile",
-        icon: IconUser,
+        icon: IconUserSquareRounded,
+    },
+    {
+        label: "Избранные курсы",
+        value: "favorites",
+        link: "/profile/favorites",
+        icon: IconBooks
     },
     {
         label: "Уведомления",
@@ -19,12 +25,6 @@ const profileTabs = [
         link: "/profile/notifications",
         icon: IconBellRinging
     },
-    {
-        label: "Избранные курсы",
-        value: "favorites",
-        link: "/profile/favorites",
-        icon: IconBooks
-    }
 ]
 
 export interface TalentProfileLayoutProps  {
@@ -51,13 +51,13 @@ const TalentProfileLayout: React.FC<TalentProfileLayoutProps> = (props) => {
             <Drawer opened={opened} onClose={close}>
                 {links}
             </Drawer>
-            <Grid gutter="xl">
-                <Grid.Col ps={0} py={0} span="content" visibleFrom="sm">
+            <Grid gutter="xl" h="100%" className={"app-grid-parent"}>
+                <Grid.Col px={12} span="content" visibleFrom="sm">
                     <aside className="sidebar">
                         {links}
                     </aside>
                 </Grid.Col>
-                <Grid.Col pe={0} py={0} span="auto">
+                <Grid.Col px={12} span="auto">
                     <Stack>
                         <Button variant="outline" color="rgba(0, 0, 0, 1)" hiddenFrom={"sm"} onClick={open}>
                             Открыть меню

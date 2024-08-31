@@ -139,8 +139,12 @@ const Header: React.FC<HeaderProps> = (props) => {
                         : isError
                             ? (
                                 <Group justify="center" grow pb="xl" px="md">
-                                    <Button radius={100} size="sm" variant="outline" color="black">Войти</Button>
-                                    <Button radius={100} size="sm" variant="filled" color="black">Регистрация</Button>
+                                    <Button onClick={() => navigate("/login")} radius={100} size="sm" variant="outline" color="black">
+                                        Войти
+                                    </Button>
+                                    <Button onClick={() => navigate("/register")} radius={100} size="sm" variant="filled" color="black">
+                                        Регистрация
+                                    </Button>
                                 </Group>
                             )
                             : null

@@ -6,10 +6,14 @@ import {Grid, Image, Skeleton, Space, Stack, Tabs, Text, Button, List} from "@ma
 import React from "react";
 import FeedbackSection from "./feedback-section.tsx";
 import TimetableSection from "./timetable-section.tsx";
+import {useAddNewFavorite, useFavoriteStatus} from "../../hooks/talent-profile/favorites.ts";
+import {IFavoriteStatus} from "../../types/talent-profile.ts";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
     const {data, isFetching, isSuccess, isError} = useCourseById(courseId.toString())
+    const {data: isFavoriteStatus, isFetching: isFavoriteStatusFetching, isSuccess: isFavoriteStatusSuccess} = useFavoriteStatus(courseId.toString())
+    const {mutateAsync: addNewFavoriteCourse} = useAddNewFavorite(courseId.toString())
 
     const navigate = useNavigate();
 
@@ -40,8 +44,29 @@ const CourseInfoPage = () => {
                             radius="lg"
                             src={(data as ICourseInfo).image_url}
                             alt="Логотип курса"
-                            fallbackSrc="https://placehold.co/1280x720?text=Нет+логотипа"
+                            fallbackSrc="https://placehold.co/1280x720?text=Нет+лого"
                         />
+                    )
+                }
+                <Space my={"md"}/>
+                {
+                    isFavoriteStatusFetching
+                    ? (
+                        <Skeleton h={36} w={"100%"}/>
+                    ): isFavoriteStatusSuccess && (
+                        <Button
+                            w={"100%"}
+                            variant="outline"
+                            color="dark"
+                            disabled={isFavoriteStatusSuccess && (isFavoriteStatus as IFavoriteStatus).is_favorite}
+                            onClick={() => addNewFavoriteCourse(undefined)}
+                        >
+                            {
+                                isFavoriteStatusSuccess && (isFavoriteStatus as IFavoriteStatus).is_favorite
+                                    ? "Уже в избранном"
+                                    : "Добавить в избранное"
+                            }
+                        </Button>
                     )
                 }
             </Grid.Col>
