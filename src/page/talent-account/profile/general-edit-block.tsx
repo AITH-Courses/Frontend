@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Divider, Group, Stack, TextInput, ImageProps} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Divider, Group, Stack, TextInput, ImageProps, FileButton} from "@mantine/core";
 import {IconCheck, IconX} from "@tabler/icons-react";
 import React, {useEffect, useRef, useState} from "react";
 import {ICreatedTalentAvatar, ITalentProfile} from "../../../types/talent-profile.ts";
@@ -27,10 +27,10 @@ const GeneralEditBlock: React.FC<GeneralEditBlockProps> = (props) => {
 
     return (
         <div className="block">
-            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="72px" onClick={() => saveProfileGeneral(profile)}>
+            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="72px" onClick={() => saveProfileGeneral(profile)} title="Сохранить изменения">
                 <IconCheck color="black" size="2rem"  stroke={1} />
             </ActionIcon>
-            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={cancelEditing}>
+            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={cancelEditing} title="Отменить">
                 <IconX color="black" size="2rem"  stroke={1} />
             </ActionIcon>
             <Group>

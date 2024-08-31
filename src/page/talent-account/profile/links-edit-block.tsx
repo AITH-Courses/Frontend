@@ -15,10 +15,10 @@ const LinksEditBlock: React.FC<LinksBlockProps> = (props) => {
 
     return (
         <div className="block">
-            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="72px" onClick={() => saveProfileLinks(profile)}>
+            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="72px" onClick={() => saveProfileLinks(profile)} title="Сохранить изменения">
                 <IconCheck color="black" size="2rem"  stroke={1} />
             </ActionIcon>
-            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={cancelEditing}>
+            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={cancelEditing} title="Отменить">
                 <IconX color="black" size="2rem"  stroke={1} />
             </ActionIcon>
             <Title order={3} ta="left">Ссылки</Title>

@@ -15,7 +15,7 @@ const LinksBlock: React.FC<LinksBlockProps> = (props) => {
 
     return (
         <div className="block">
-            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={startEditing}>
+            <ActionIcon variant="transparent" size="xl" aria-label="Settings" pos="absolute" top="24px" right="24px" onClick={startEditing} title="Редактировать ссылки">
                 <IconPencil color="black" size="2rem"  stroke={1} />
             </ActionIcon>
             <Title order={3} ta="left">Ссылки</Title>
