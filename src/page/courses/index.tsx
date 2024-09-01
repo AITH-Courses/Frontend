@@ -38,6 +38,7 @@ export default function CoursesPage(){
             role: initialFilters.roles,
             term: initialFilters.terms,
             format: initialFilters.formats,
+            only_actual: initialFilters.only_actual? "yes": "no",
             page: value.toString()
         });
     }
