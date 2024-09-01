@@ -61,7 +61,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = (props) => {
         <div style={{display: "flex", flexDirection: "column"}}>
             <Rating defaultValue={feedback.rating} count={5} readOnly/>
             <Space h={4}/>
-            <Text c="black" ta={"left"} style={{whiteSpace: "pre"}}>
+            <Text c="black" ta={"left"} style={{whiteSpace: "pre-wrap"}}>
                 {feedback.text}
             </Text>
             <Group>
