@@ -17,6 +17,7 @@ export default function CoursesPage(){
         roles: search.getAll("role"),
         terms: search.getAll("term"),
         formats: search.getAll("format"),
+        only_actual: search.get("only_actual") === "yes",
     }
     const page = search.get("page") != null? +search.get("page"): 1
     const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page});
@@ -27,6 +28,7 @@ export default function CoursesPage(){
             role: filters.roles,
             term: filters.terms,
             format: filters.formats,
+            only_actual: filters.only_actual? "yes": "no",
             page: "1",
         });
     }

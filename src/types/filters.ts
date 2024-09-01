@@ -3,6 +3,7 @@ interface ICourseFilters{
     roles: Array<string>,
     terms: Array<string>,
     formats: Array<string>,
+    only_actual: boolean
 }
 
 export {ICourseFilters};

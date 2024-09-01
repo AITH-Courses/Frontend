@@ -25,6 +25,12 @@ const CoursesFilter: React.FC<CourseFilterProps> = (props) => {
     const filtersElements = (
         <Stack>
             <Text fw={600} fz={"h3"}>Фильтры</Text>
+            <Checkbox
+                checked={filters.only_actual}
+                onChange={(e) => setFilters({...filters, only_actual: e.target.checked})}
+                label={"Только актуальные"}
+                color="black"
+            />
             <Stack gap="xs">
                 <Text size="md">Роли</Text>
                 {
@@ -96,7 +102,7 @@ const CoursesFilter: React.FC<CourseFilterProps> = (props) => {
                     variant="filled"
                     color="rgba(0, 0, 0, 1)"
                     fullWidth
-                    onClick={() => setFilters({terms: [], implementers: [], formats: [], roles: []})}
+                    onClick={() => setFilters({terms: [], implementers: [], formats: [], roles: [], only_actual: false})}
                 >
                     Сбросить
                 </Button>
