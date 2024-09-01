@@ -1,5 +1,18 @@
-import {Button, Skeleton, Stack, Text, Table, Group, Space, MantineColor, Anchor, Badge, Modal} from "@mantine/core";
-import React from "react";
+import {
+    Button,
+    Skeleton,
+    Stack,
+    Text,
+    Table,
+    Group,
+    Space,
+    MantineColor,
+    Anchor,
+    Badge,
+    Modal,
+    TextInput
+} from "@mantine/core";
+import React, {useState} from "react";
 import AdminLayout from "../../layouts/admin-layout";
 import {useCourses} from "../../hooks/admin/courses.ts";
 import {ICourseCard} from "../../types/courses.ts";
@@ -7,11 +20,13 @@ import {useNavigate} from "react-router-dom";
 import {useDisclosure} from "@mantine/hooks";
 import {CreateCourseModal} from "./modals.tsx";
 import {AxiosError} from "axios";
+import {IconSearch} from "@tabler/icons-react";
 
 const AdminCoursesPage = () => {
     const [opened, { open, close }] = useDisclosure(false);
-    const navigate = useNavigate()
-    const {data, isFetching, isError, error} = useCourses()
+    const navigate = useNavigate();
+    const {data, isFetching, isError, error} = useCourses();
+    const [search, setSearch] = useState("");
 
     if (isFetching) {
         return <AdminLayout>
@@ -37,7 +52,7 @@ const AdminCoursesPage = () => {
 
     }
 
-    const rows = data && (data as Array<ICourseCard>).map((course) => (
+    const rows = data && (data as Array<ICourseCard>).filter(course => course.name.includes(search)).map((course) => (
         <Table.Tr
             key={course.name}
         >
@@ -84,6 +99,7 @@ const AdminCoursesPage = () => {
             </Modal>
             <Group>
                 <Button variant="outline" color={"black" as MantineColor} onClick={open}>Новый</Button>
+                <TextInput placeholder={"Поиск по названию"} rightSection={<IconSearch color="grey"/>} value={search} onChange={e => setSearch(e.currentTarget.value)}/>
             </Group>
             <Space h={"sm"}/>
             <Table highlightOnHover>
