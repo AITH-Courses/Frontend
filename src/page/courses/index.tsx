@@ -2,7 +2,7 @@ import DefaultLayout from "../../layouts/default-layout";
 import CoursesFilter from "../../components/course-filter";
 import React from "react";
 import {ICourseFilters} from "../../types/filters.ts";
-import {Flex, Grid, Pagination, Space, Stack, Text, Title} from "@mantine/core";
+import {Flex, Grid, Group, Pagination, Space, Stack, Text, Title} from "@mantine/core";
 import CourseCard from "../../components/course-card";
 import {useSearchParams} from "react-router-dom";
 import {useCourses} from "../../hooks/courses";
@@ -89,7 +89,6 @@ export default function CoursesPage(){
                         </Grid>
                         {
                             !isFetching && isSuccess && (
-
                                 <Flex
                                     justify="center"
                                     align="center"
@@ -97,11 +96,31 @@ export default function CoursesPage(){
                                 >
                                     <Space h="xl"/>
                                     <Pagination
+                                        visibleFrom={"xs"}
+                                        gap={4}
                                         color="black"
+                                        boundaries={1}
+                                        siblings={1}
                                         total={(data as ICoursesWithPage).max_page}
                                         value={page}
-                                        onChange={setPage} size="md"
+                                        onChange={setPage}
+                                        size="md"
                                     />
+                                    <Pagination.Root
+                                        hiddenFrom={"xs"}
+                                        total={(data as ICoursesWithPage).max_page}
+                                        value={page}
+                                        onChange={setPage}
+                                        gap={8}
+                                    >
+                                        <Group gap={12} justify="center">
+                                            <Pagination.First />
+                                            <Pagination.Previous />
+                                            <Text>{page}</Text>
+                                            <Pagination.Next />
+                                            <Pagination.Last />
+                                        </Group>
+                                    </Pagination.Root>
                                 </Flex>
                             )
                         }
