@@ -52,7 +52,7 @@ const AdminCoursesPage = () => {
 
     }
 
-    const rows = data && (data as Array<ICourseCard>).filter(course => course.name.includes(search)).map((course) => (
+    const rows = data && (data as Array<ICourseCard>).filter(course => course.name.toLowerCase().includes(search.toLowerCase())).map((course) => (
         <Table.Tr
             key={course.name}
         >
