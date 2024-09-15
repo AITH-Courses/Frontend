@@ -65,7 +65,7 @@ const AdminCourseRunLayout: React.FC<AdminCourseRunLayoutProps> = (props) => {
                 onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`)}
                 color="orange"
                 variant="subtle"
-                childrenOffset={36}
+                childrenOffset={0}
                 opened={item.links.reduce((acc, nestedItem) => acc || location.pathname.endsWith(nestedItem.suffix) || location.pathname.endsWith(item.suffix), false)}
             >
                 {
@@ -77,6 +77,7 @@ const AdminCourseRunLayout: React.FC<AdminCourseRunLayoutProps> = (props) => {
                             onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}${nestedItem.suffix}`)}
                             color="orange"
                             variant="subtle"
+                            ps={48}
                         />
                     ))
                 }
