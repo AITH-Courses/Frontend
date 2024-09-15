@@ -1,3 +1,5 @@
+import {IGoogleCalendarLink} from "./google-calendar.ts";
+
 interface ITimetableLesson{
     start_time: string,
     end_time: string,
@@ -6,7 +8,8 @@ interface ITimetableLesson{
 
 interface ICourseTimetable{
     lessons: Array<ITimetableLesson>,
-    course_run_name: string
+    course_run_name: string,
+    group_google_calendars: Array<IGoogleCalendarLink>
 }
 
 interface IWeekRule{
