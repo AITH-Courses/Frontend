@@ -7,7 +7,6 @@ import {
     Group,
     Space,
     MantineColor,
-    Anchor,
     Badge,
     Modal,
     TextInput
@@ -16,11 +15,12 @@ import React, {useState} from "react";
 import AdminLayout from "../../layouts/admin-layout";
 import {useCourses} from "../../hooks/admin/courses.ts";
 import {ICourseCard} from "../../types/courses.ts";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useDisclosure} from "@mantine/hooks";
 import {CreateCourseModal} from "./modals.tsx";
 import {AxiosError} from "axios";
 import {IconSearch} from "@tabler/icons-react";
+import "./index.css";
 
 const AdminCoursesPage = () => {
     const [opened, { open, close }] = useDisclosure(false);
@@ -52,14 +52,14 @@ const AdminCoursesPage = () => {
 
     }
 
-    const rows = data && (data as Array<ICourseCard>).filter(course => course.name.includes(search)).map((course) => (
+    const rows = data && (data as Array<ICourseCard>).filter(course => course.name.toLowerCase().includes(search.toLowerCase())).map((course) => (
         <Table.Tr
             key={course.name}
         >
             <Table.Td>
-                <Anchor component="button" fz="sm" onClick={() => navigate("/admin/courses/" + course.id)}>
+                <NavLink to={"/admin/courses/" + course.id} className={"course-link"}>
                     <Text ta="left" fw={600} c="blue">{course.name}</Text>
-                </Anchor>
+                </NavLink>
             </Table.Td>
             <Table.Td visibleFrom={"sm"}>
                 {

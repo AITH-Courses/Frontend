@@ -1,4 +1,4 @@
-import {Button, Group, Skeleton, Stack, Table, Text} from "@mantine/core";
+import {Anchor, Button, Group, Skeleton, Stack, Table, Text} from "@mantine/core";
 import React from "react";
 import {useCourseTimetable} from "../../hooks/timetable";
 import {ICourseTimetable} from "../../types/timetable.ts";
@@ -42,7 +42,7 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
         link.remove();
     }
 
-    const rows = isSuccess && data && (data as ICourseTimetable).lessons.map((lesson, index) => (
+    const rows = isSuccess && data && (data as ICourseTimetable).lessons.map((lesson) => (
         <Table.Tr
             key={lesson.date + lesson.start_time}
         >
@@ -58,26 +58,70 @@ const TimetableSection: React.FC<TimetableSectionProps> = (props) => {
         </Table.Tr>
     ));
 
+    const group_google_calendars = isSuccess && data && (data as ICourseTimetable).group_google_calendars;
+    const lessons = isSuccess && data && (data as ICourseTimetable).lessons;
+
     return (
         <Stack px={16} pt={16}>
             <Text fw={600} fz={"h3"}>
                 Запуск курса ({isSuccess && data && (data as ICourseTimetable).course_run_name})
             </Text>
+            {
+                group_google_calendars && group_google_calendars.length > 1
+                    ? (
+                        <Stack gap={8}>
+                            <Text size="lg" ta="left" >
+                                Расписание отличается для разных потоков:
+                            </Text>
+                            {
+                                group_google_calendars.map(ggc => (
+                                    <Group key={ggc.id} gap={4}>
+                                        <Text size="lg" ta="left">
+                                            - {ggc.name === "" ? "Без названия": ggc.name}:
+                                        </Text>
+                                        <Anchor component={"a"} fz="sm" href={ggc.link} target="_blank">
+                                            <Text size="lg" ta="left" >
+                                                Google Календарь
+                                            </Text>
+                                        </Anchor>
+                                    </Group>
+                                ))
+                            }
+                        </Stack>
+                    ): null
+            }
             <Group>
-                <Button variant="outline" color="black" onClick={downloadICS}>
-                    Скачать ICS
-                </Button>
+                {
+                    group_google_calendars && group_google_calendars.length === 1 && group_google_calendars.map(ggc => (
+                        <Anchor component={"a"} key={ggc.id} fz="sm" href={ggc.link} target="_blank">
+                            <Button variant="outline" color="black">
+                                Добавить в Google Календарь
+                            </Button>
+                        </Anchor>
+                    ))
+                }
+                {
+                    group_google_calendars && group_google_calendars.length <= 1 && lessons && lessons.length >0 && (
+                        <Button variant="outline" color="black" onClick={downloadICS}>
+                            Скачать ICS
+                        </Button>
+                    )
+                }
             </Group>
-            <Table highlightOnHover maw={500}>
-                <Table.Thead>
-                    <Table.Tr>
-                        <Table.Th><Text fw={700}>Дата</Text></Table.Th>
-                        <Table.Th><Text fw={700}>День недели</Text></Table.Th>
-                        <Table.Th><Text fw={700}>Время</Text></Table.Th>
-                    </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody>{rows}</Table.Tbody>
-            </Table>
+            {
+                group_google_calendars && group_google_calendars.length <= 1 && lessons && lessons.length > 0 && (
+                    <Table highlightOnHover maw={500}>
+                        <Table.Thead>
+                            <Table.Tr>
+                                <Table.Th><Text fw={700}>Дата</Text></Table.Th>
+                                <Table.Th><Text fw={700}>День недели</Text></Table.Th>
+                                <Table.Th><Text fw={700}>Время</Text></Table.Th>
+                            </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody>{rows}</Table.Tbody>
+                    </Table>
+                )
+            }
         </Stack>
     )
 }

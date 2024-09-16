@@ -11,16 +11,22 @@ const profileTabs = [
         label: "Общее",
         suffix: "",
         icon: IconBook,
+        links: []
     },
     {
         label: "Расписание",
         suffix: "/timetable",
         icon: IconCalendarMonth,
+        links: [
+            { label: 'Правила', suffix: '/rules' },
+            { label: 'Google-календарь', suffix: '/google-calendar' },
+        ],
     },
     {
         label: "Студенты",
         suffix: "/members",
-        icon: IconUsers
+        icon: IconUsers,
+        links: []
     }
 ]
 
@@ -39,15 +45,44 @@ const AdminCourseRunLayout: React.FC<AdminCourseRunLayoutProps> = (props) => {
     const navigate = useNavigate();
     const [opened, { open, close }] = useDisclosure(false);
     const links= profileTabs.map(item => (
-        <NavLink
-            key={item.label}
-            active={location.pathname == `/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`}
-            label={item.label}
-            leftSection={<item.icon c={"#8D8D98"} size="1.5rem" stroke={1} />}
-            onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`)}
-            color="orange"
-            variant="subtle"
-        />
+        item.links.length == 0
+        ? (
+            <NavLink
+                key={item.label}
+                active={location.pathname == `/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`}
+                label={item.label}
+                leftSection={<item.icon c={"#8D8D98"} size="1.5rem" stroke={1} />}
+                onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`)}
+                color="orange"
+                variant="subtle"
+            />
+        ): (
+            <NavLink
+                key={item.label}
+                active={location.pathname.includes(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`)}
+                label={item.label}
+                leftSection={<item.icon c={"#8D8D98"} size="1.5rem" stroke={1} />}
+                onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}`)}
+                color="orange"
+                variant="subtle"
+                childrenOffset={0}
+                opened={item.links.reduce((acc, nestedItem) => acc || location.pathname.endsWith(nestedItem.suffix) || location.pathname.endsWith(item.suffix), false)}
+            >
+                {
+                    item.links.map(nestedItem => (
+                        <NavLink
+                            key={nestedItem.label}
+                            active={location.pathname == `/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}${nestedItem.suffix}`}
+                            label={nestedItem.label}
+                            onClick={() => navigate(`/admin/courses/${(params as layoutParams).courseId}/runs/${(params as layoutParams).courseRunId}${item.suffix}${nestedItem.suffix}`)}
+                            color="orange"
+                            variant="subtle"
+                            ps={48}
+                        />
+                    ))
+                }
+            </NavLink>
+        )
     ))
     return (
         <AdminLayout>
