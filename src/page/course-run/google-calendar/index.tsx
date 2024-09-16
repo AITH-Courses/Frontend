@@ -92,7 +92,7 @@ const CourseRunGoogleCalendarPage = () => {
                         ? <Skeleton height={130} width={"100%"} radius="lg" />
                         : (data as Array<IGoogleCalendarLink>).length > 0
                             ? links
-                            : <Text>Правила отсутствуют</Text>
+                            : <Text>Ссылки отсутствуют</Text>
                 }
             </Flex>
         </AdminCourseRunLayout>
