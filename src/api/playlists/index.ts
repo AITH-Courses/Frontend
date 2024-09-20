@@ -2,7 +2,7 @@ import axiosInstance from "../axios.ts";
 import {IPlaylist} from "../../types/playlists.ts";
 
 const URL = {
-    GET_PLAYLISTS: "/api/v1/admin/courses/courseId/runs/courseRunId/playlists",
+    GET_PLAYLISTS: "/api/v1/courses/courseId/playlists",
 };
 
 const getCoursePlaylists = (courseId: string) => {

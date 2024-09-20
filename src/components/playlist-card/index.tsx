@@ -48,7 +48,7 @@ const PlaylistCard: React.FC<PlaylistCardProps> = (props) => {
                 <UpdatePlaylistModal courseId={courseId} courseRunId={courseRunId} playlist={playlist} closeModal={close}/>
             </Modal>
             {button}
-            <Text fw={700}>
+            <Text fw={500}>
                 {
                     playlist.name === ""
                         ? "Без названия"
