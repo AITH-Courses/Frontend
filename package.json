@@ -20,7 +20,7 @@
     "@tabler/icons-react": "^3.7.0",
     "@tanstack/react-query": "^5.50.1",
     "@tanstack/react-query-devtools": "^5.51.1",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "dayjs": "^1.11.11",
     "embla-carousel-react": "^8.1.6",
     "qs": "^6.12.3",
