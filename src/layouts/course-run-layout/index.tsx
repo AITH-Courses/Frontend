@@ -1,5 +1,5 @@
 import React from "react";
-import { IconCalendarMonth, IconUsers, IconBook } from '@tabler/icons-react';
+import { IconCalendarMonth, IconUsers, IconBook, IconMovie } from '@tabler/icons-react';
 import {Button, Drawer, Grid, NavLink, Stack} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
@@ -21,6 +21,12 @@ const profileTabs = [
             { label: 'Правила', suffix: '/rules' },
             { label: 'Google-календарь', suffix: '/google-calendar' },
         ],
+    },
+    {
+        label: "Плейлисты",
+        suffix: "/playlists",
+        icon: IconMovie,
+        links: []
     },
     {
         label: "Студенты",
