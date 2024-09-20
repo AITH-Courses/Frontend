@@ -18,6 +18,7 @@ import CourseRunMembersPage from "../page/course-run/members";
 import AdminLoginPage from "../page/admin-login";
 import AutoScrollArea from "../other/auto-scroll";
 import CourseRunGoogleCalendarPage from "../page/course-run/google-calendar";
+import CourseRunPlaylistsPage from "../page/course-run/playlists";
 
 const router = createBrowserRouter([
     {
@@ -90,6 +91,12 @@ const router = createBrowserRouter([
         path: "/admin/courses/:courseId/runs/:courseRunId/timetable",
         element: (
             <AutoScrollArea><CourseRunTimetablePage/></AutoScrollArea>
+        ),
+    },
+    {
+        path: "/admin/courses/:courseId/runs/:courseRunId/playlists",
+        element: (
+            <AutoScrollArea><CourseRunPlaylistsPage/></AutoScrollArea>
         ),
     },
     {

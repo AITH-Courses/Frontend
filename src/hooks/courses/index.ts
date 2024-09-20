@@ -2,7 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import {getCourseById, getCourses} from "../../api/courses";
 import {ICourseFilters} from "../../types/filters.ts";
 
-const useCourses = (filters: ICourseFilters & {page: number}) => {
+const useCourses = (filters: ICourseFilters & {page: number, query: string}) => {
     return useQuery(
         {
             queryKey: ["courses", JSON.stringify(filters)],

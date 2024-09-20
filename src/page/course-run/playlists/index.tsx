@@ -4,10 +4,10 @@ import React from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {AxiosError} from "axios";
 import {useDisclosure} from "@mantine/hooks";
-import {useGoogleCalendarLinks} from "../../../hooks/admin/gogle-calendar.ts";
-import {IGoogleCalendarLink} from "../../../types/google-calendar.ts";
-import GoogleCalendarLinkCard from "../../../components/google-calendar-link-card";
-import {CreateGoogleLinkModal} from "./create-google-link-modal.tsx";
+import {usePlaylists} from "../../../hooks/admin/playlists.ts";
+import {IPlaylist} from "../../../types/playlists.ts";
+import {CreatePlaylistModal} from "./create-playlist-modal.tsx";
+import PlaylistCard from "../../../components/playlist-card";
 
 
 interface pageParams{
@@ -15,11 +15,11 @@ interface pageParams{
     courseRunId: string
 }
 
-const CourseRunGoogleCalendarPage = () => {
+const CourseRunPlaylistsPage = () => {
     const navigate = useNavigate();
     const params = useParams();
     const [opened, { open, close }] = useDisclosure(false);
-    const {data, isSuccess, isLoading, isError, error} = useGoogleCalendarLinks((params as pageParams).courseId, (params as pageParams).courseRunId);
+    const {data, isSuccess, isLoading, isError, error} = usePlaylists((params as pageParams).courseId, (params as pageParams).courseRunId);
 
     if (isError){
         if ((error as AxiosError).response.status === 401){
@@ -42,24 +42,22 @@ const CourseRunGoogleCalendarPage = () => {
         )
     }
 
-    const links = isSuccess && data && (data as Array<IGoogleCalendarLink>).map(link => (
-        <GoogleCalendarLinkCard
-            key={link.id}
-            id={link.id}
-            name={link.name}
-            link={link.link}
+    const playlists = isSuccess && data && (data as Array<IPlaylist>).map(playlist => (
+        <PlaylistCard
+            key={playlist.id}
             courseId={(params as pageParams).courseId}
             courseRunId={(params as pageParams).courseRunId}
+            playlist={playlist}
         />
     ))
 
     return (
         <AdminCourseRunLayout>
-            <Modal opened={opened} onClose={close} title="Создание нового правила" centered>
-                <CreateGoogleLinkModal
-                    closeModal={close}
+            <Modal opened={opened} onClose={close} title="Создание нового плейлиста" centered>
+                <CreatePlaylistModal
                     courseId={(params as pageParams).courseId}
                     courseRunId={(params as pageParams).courseRunId}
+                    closeModal={close}
                 />
             </Modal>
             <Group>
@@ -69,10 +67,10 @@ const CourseRunGoogleCalendarPage = () => {
                     : (
                         <>
                             <Title order={2} ta="left">
-                                Ссылки на Google-календарь
+                                Плейлисты
                             </Title>
                             <Button variant="outline" color="black" radius="xl" onClick={open}>
-                                Новая
+                                Новый
                             </Button>
                         </>
                     )
@@ -89,14 +87,14 @@ const CourseRunGoogleCalendarPage = () => {
             >
                 {
                     isLoading
-                        ? <Skeleton height={130} width={"100%"} radius="lg" />
-                        : (data as Array<IGoogleCalendarLink>).length > 0
-                            ? links
-                            : <Text>Ссылки отсутствуют</Text>
+                    ? <Skeleton height={130} width={"100%"} radius="lg" />
+                    : (data as Array<IPlaylist>).length > 0
+                        ? playlists
+                        : <Text>Плейлисты отсутствуют</Text>
                 }
             </Flex>
         </AdminCourseRunLayout>
     )
 }
 
-export default CourseRunGoogleCalendarPage;
+export default CourseRunPlaylistsPage;

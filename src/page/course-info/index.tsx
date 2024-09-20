@@ -8,6 +8,7 @@ import FeedbackSection from "./feedback-section.tsx";
 import TimetableSection from "./timetable-section.tsx";
 import {useAddNewFavorite, useFavoriteStatus} from "../../hooks/talent-profile/favorites.ts";
 import {IFavoriteStatus} from "../../types/talent-profile.ts";
+import PlaylistsSection from "./playlists-section.tsx";
 
 const CourseInfoPage = () => {
     const {courseId} = useParams();
@@ -198,6 +199,9 @@ const CourseInfoPage = () => {
                 <Tabs.Tab value="timetable">
                     <Text size="xl">Расписание</Text>
                 </Tabs.Tab>
+                <Tabs.Tab value="playlists">
+                    <Text size="xl">Плейлисты</Text>
+                </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="info">
@@ -354,6 +358,9 @@ const CourseInfoPage = () => {
             </Tabs.Panel>
             <Tabs.Panel value="timetable">
                 <TimetableSection courseId={courseId.toString()} courseName={data && (data as ICourseInfo).name}/>
+            </Tabs.Panel>
+            <Tabs.Panel value="playlists">
+                <PlaylistsSection courseId={courseId.toString()}/>
             </Tabs.Panel>
         </Tabs>
     </DefaultLayout>

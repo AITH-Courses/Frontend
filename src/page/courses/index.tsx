@@ -1,13 +1,15 @@
 import DefaultLayout from "../../layouts/default-layout";
 import CoursesFilter from "../../components/course-filter";
-import React from "react";
+import React, {useState} from "react";
 import {ICourseFilters} from "../../types/filters.ts";
-import {Flex, Grid, Group, Pagination, Space, Stack, Text, Title} from "@mantine/core";
+import {Flex, Grid, Group, Pagination, Space, Stack, Text, TextInput, Title} from "@mantine/core";
 import CourseCard from "../../components/course-card";
 import {useSearchParams} from "react-router-dom";
 import {useCourses} from "../../hooks/courses";
 import EmptyCourseCard from "../../components/empty-course-card";
 import {ICoursesWithPage} from "../../types/courses.ts";
+import {IconSearch} from "@tabler/icons-react";
+import {useDebouncedCallback} from "@mantine/hooks";
 
 
 export default function CoursesPage(){
@@ -19,8 +21,27 @@ export default function CoursesPage(){
         formats: search.getAll("format"),
         only_actual: search.get("only_actual") === "yes",
     }
+    const searchQuery = search.get("query") || "";
+    const [query, setQuery] = useState<string>(searchQuery);
     const page = search.get("page") != null? +search.get("page"): 1
-    const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page});
+    const {data, isSuccess, isFetching, isError} = useCourses({...initialFilters, page: page, query: searchQuery});
+
+    const handleSearch = useDebouncedCallback(async (searchQuery: string) => {
+        setSearch({
+            implementer: initialFilters.implementers,
+            role: initialFilters.roles,
+            term: initialFilters.terms,
+            format: initialFilters.formats,
+            only_actual: initialFilters.only_actual? "yes": "no",
+            page: "1",
+            query: searchQuery
+        })
+    }, 500);
+
+    const updateQuery = (searchQuery: string) => {
+        setQuery(searchQuery)
+        handleSearch(searchQuery)
+    }
 
     const applyFilters = (filters: ICourseFilters) => {
         setSearch({
@@ -30,6 +51,7 @@ export default function CoursesPage(){
             format: filters.formats,
             only_actual: filters.only_actual? "yes": "no",
             page: "1",
+            query: searchQuery
         });
     }
     const setPage = (value: number) => {
@@ -39,7 +61,8 @@ export default function CoursesPage(){
             term: initialFilters.terms,
             format: initialFilters.formats,
             only_actual: initialFilters.only_actual? "yes": "no",
-            page: value.toString()
+            page: value.toString(),
+            query: searchQuery
         });
     }
 
@@ -56,6 +79,13 @@ export default function CoursesPage(){
                         />
                     </Grid.Col>
                     <Grid.Col span={{xs: 12, sm: 8, md: 9, lg: 10}}>
+                        <TextInput
+                            placeholder={"Поиск по названию"}
+                            rightSection={<IconSearch color="grey"/>}
+                            value={query}
+                            onChange={e => updateQuery(e.currentTarget.value)}
+                            mb={12}
+                        />
                         <Grid gutter="sm">
                             {
                                 !isFetching && isSuccess && (data as ICoursesWithPage).courses.map(card => (
@@ -73,7 +103,7 @@ export default function CoursesPage(){
                                                 Похоже, ничего не нашлось...
                                             </Title>
                                             <Text c="dimmed" size="lg" ta={"center"}>
-                                                Попробуйте изменить фильтры
+                                                Попробуйте изменить фильтры или запрос
                                             </Text>
                                         </Stack>
                                     </Grid.Col>

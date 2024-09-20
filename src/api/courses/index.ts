@@ -9,7 +9,7 @@ const URL = {
     GET_COURSE: "/api/v1/courses/",
 };
 
-const getCourses = (filters: ICourseFilters & {page: number}) => {
+const getCourses = (filters: ICourseFilters & {page: number, query: string}) => {
     return  axiosInstance.get<ICoursesWithPage>(URL.GET_COURSES, {
         params: filters,
         paramsSerializer: (params) => {
