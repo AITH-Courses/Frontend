@@ -1,4 +1,4 @@
-import {Anchor, Button, Flex, Group, Skeleton, Stack, Text} from "@mantine/core";
+import {Anchor, Button, Group, Skeleton, Stack, Text} from "@mantine/core";
 import React from "react";
 import {AxiosError} from "axios";
 import {useCoursePlaylists} from "../../hooks/playlists";
@@ -53,6 +53,13 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = (props) => {
                         </Anchor>
                     </Group>
                 ))
+            }
+            {
+                playlists && playlists.length == 0 && (
+                    <Text c="dimmed" size="lg" ta="left" >
+                        Плейлисты не добавлены
+                    </Text>
+                )
             }
             </Group>
         </Stack>

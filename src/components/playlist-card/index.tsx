@@ -44,7 +44,7 @@ const PlaylistCard: React.FC<PlaylistCardProps> = (props) => {
 )
     return (
         <div className={"admin-playlist"}>
-            <Modal opened={opened} onClose={close} title="Редактирование существующего правила" centered>
+            <Modal opened={opened} onClose={close} title="Редактирование существующего плейлиста" centered>
                 <UpdatePlaylistModal courseId={courseId} courseRunId={courseRunId} playlist={playlist} closeModal={close}/>
             </Modal>
             {button}
